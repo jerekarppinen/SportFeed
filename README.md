@@ -43,8 +43,8 @@ etusivulla suosituimpia uutisia jokaisesta aihepiiristä
 nav barissa eri urheilulajeja? navbar vasemmassa laidassa vai bannerin alla? hmmm. sivulle ois kivuttomampi laittaa,
 koska suattaapi tulla paljon linkkejä. 
 
-masonry käyttöön ulkoasun tekemisessä. sillä onnistuu elementtien sijoittelukin käyttäjältä
-  -> uutisten sijoittelu omissa aihepiireissään. kivat suht isot möllykät
+masonry käyttöön ulkoasun tekemisessä vaaai tarviiko
+gridster.js hoitaisi elementtien sijoittelun
 
 filttereitä, filttereitä kaikkialla (ajan perusteella, suosituimmat (klikatuimmat), äänestetyimmät, 
 ehkä kommentoiduimmat)
