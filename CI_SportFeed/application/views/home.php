@@ -1,5 +1,4 @@
-<?php foreach($linkit as $linkki) : ?>
+<?php foreach($entries as $entry) : ?>
 
-<p><?php echo $linkki->menunimi; ?> </p>
-
+<p><?php echo $entry['title']; ?>
 <?php endforeach; ?>
