@@ -39,12 +39,11 @@ on pelkästää niitä uutisia.
 
 ULKOASU
 
-etusivulla suosituimpia uutisia jokaisesta aihepiiristä
-nav barissa eri urheilulajeja? navbar vasemmassa laidassa vai bannerin alla? hmmm. sivulle ois kivuttomampi laittaa,
-koska suattaapi tulla paljon linkkejä. 
+etusivulla eri urheilulajeista uutisia sekaisin. tarjolla eri filttereitä suodattamaan uutisista haluamiaan
+nav barissa eri urheilulajeja, navbar vasemmassa laidassa
 
-masonry käyttöön ulkoasun tekemisessä, kenties juu. 
-gridster.js jquery plugin hoitaisi elementtien sijoittelun mahollisesti
+masonry käyttöön ulkoasun tekemisessä, uutismöllyköiden asetteluun vittumaisella masonrytavalla mutta jospa se ois hip and cool
+gridster.js jquery plugin hoitaisi elementtien siirtelyn, jos sitä tulee tähän projektiin. 
 
-filttereitä, filttereitä kaikkialla (ajan perusteella, suosituimmat (klikatuimmat), äänestetyimmät, 
-ehkä kommentoiduimmat)
+kun käyttäjä kirjautuu, sivu näyttää käyttäjän seuraamien urheilulajien uusimmat uutiset. sama näkymä kuin etusivulla, filttereitä ja näin.
+twiitit ehkäpä sivun oikeaan laitaan pitkään mutta kapeahkoon diviin? twiiteillä on tapana kuitenkin olla lyhyitä. mutta twiitit voi omata kokonaan omalle sivulleenkin masonryhommaan
