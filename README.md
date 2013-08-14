@@ -13,6 +13,8 @@ KONSEPTI (hieno sana jes)
 
 -käyttäjät vois pystyä kommentoimaan uutisia eiks je? miten ois upvote/downvote kans? hyvää paskaa
 
+-tarjolla eri filttereitä suodattamaan uutisista haluamiaan. kuten suosituimmat ja ajan mukaan. myös video/artikkeli uutisille?
+
 -TWITTER osio:
   hakukenttä jolla voi hakea käyttäjiä twitteristä, lisätä itsensä heidän seuraajiksi
 	seurattujen twitterheebojen julkaisut näkyvät sportfeed-sivun käyttäjälle
@@ -29,7 +31,7 @@ tee kickass classi. you the man, bro.
 
 ULKOASU
 
-etusivulla eri urheilulajeista uutisia sekaisin. tarjolla eri filttereitä suodattamaan uutisista haluamiaan
+etusivulla eri urheilulajeista uutisia sekaisin.
 nav barissa eri urheilulajeja, navbar vasemmassa laidassa
 
 masonry käyttöön ulkoasun tekemisessä, uutismöllyköiden asetteluun vittumaisella masonrytavalla mutta jospa se ois hip and cool
