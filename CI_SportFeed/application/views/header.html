@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel="stylesheet" href="/application/css/styles.css" />
+<script type="text/javascript" src="/application/libraries/jquery.203.js"></script>
+<script type="text/javascript" src="/application/libraries/masonry.js"></script>
+<title>Sportster!</title>
+</head>
+<body>
+<script type="text/javascript">
+	var contti = $('#news-container');
+	contti.masonry({
+	  // options
+	  columnWidth: 200,
+	  itemSelector: '.item'
+	});
+</script>
+<a id="banner" href="index.html"></a>
+<div id="wrapper" class="clearfix">
+	<ul id="navbox" class="clearfix">
+		<li><a href="">Etusivu</a></li>
+		<li><a href="">MLB</a></li>
+		<li><a href="">NFL</a></li>
+		<li><a href="">NBA</a></li>
+		<li><a href="">NHL</a></li>
+		<li><a href="">Jokufutislol</a></li>
+	</ul>
+	<ul id="filter-container" class="clearfix">
+		<li><a href="">Uusimmat</a></li>
+		<li><a href="">Suosituimmat</a></li>
+		<li><a href="">Tykätyimmät</a></li>
+		<li><a href="">Paheksutuimmat</a></li>
+		<li><a href="">Kommentoiduimmat</a></li>
+	</ul>

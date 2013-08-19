@@ -1,0 +1,44 @@
+/* GENERAL STYLES */
+body { margin:0; padding:0; }
+#banner { display:block; background:url('banneri.jpg') no-repeat center; height:200px; width:100%; }
+
+#wrapper { width:96%; margin-left:auto; margin-right:auto; border:1px solid black; height:auto;}
+
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	overflow: hidden;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+#navbox { 
+	margin:0;
+	padding:0;
+	padding:7px 0 7px 0;
+	height:10%;
+	width:100%;
+	text-align:center;
+	border:1px solid red; 
+	list-style-type: none; 
+}
+#navbox li { display:inline-block; margin-left:20px;}
+
+#filter-container { text-align:center; margin-left:auto; margin-right:auto; padding:0; list-style-type: none; }
+#filter-container  li { display:inline-block; margin-right:20px;}
+
+#news-container { padding:10px; border:1px solid green; }
+
+.item {
+  width: 240px;
+  height: 120px;
+  float: left;
+  margin:0 10px 10px 0;
+  background: #D26;
+  border: 2px solid #333;
+  border-color: hsla(0, 0%, 0%, 0.5);
+  border-radius: 5px;
+}
