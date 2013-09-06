@@ -1,10 +1,14 @@
-<?php include("header.html"); ?>
-<div id="news-container" class="js-masonry">
+<?php include("header.php"); ?>
 
-<?php foreach($entries as $entry) : ?>
-	<div class="item"><?php echo $entry['title']; ?></div>
-<?php endforeach; ?>
+<div id="news-container clearfix" class="js-masonry">
+
+<?php if(isset($entries)) {
+							 foreach($entries as $entry) : ?>
+							<div class="item"><p><b><?php echo $entry['title']; ?></b></p> <p><?php echo $entry['description']; ?></p> <p><?php echo $entry['pubDate']; ?></p></div>
+<?php endforeach; } ?>
 
 </div>
 
-<?php include("footer.html"); ?>
+
+
+<?php include("footer.php"); ?>
