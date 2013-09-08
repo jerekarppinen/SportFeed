@@ -7,9 +7,13 @@ KONSEPTI (hieno sana jes)
 
 -jenkkien seuratuimpia urheilulajeja lähinnä: 
 	mlb http://mlb.mlb.com/partnerxml/gen/news/rss/mlb.xml / joukkuekohtaiset myöhemmi http://mlb.mlb.com/news/rss/
+	
 	nfl http://www.nfl.com/rss/rsslanding?searchString=home / joukkuekohtaset myöhemmi http://www.nfl.com/rss
+	
 	nba http://www.nba.com/rss/nba_rss.xml / jne http://www.nba.com/rss/
+	
 	nhl http://www.nhl.com/rss/news.xml
+	
 	futista (vitun futis, laitetaa myähemmi)
 
 
