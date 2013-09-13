@@ -1,6 +1,6 @@
 /* GENERAL STYLES */
 body { margin:0; padding:0; }
-#banner { display:block; background:url('banneri.jpg') no-repeat center; height:200px; width:100%; }
+#banner { display:block; background:url('../images/banneri.jpg') no-repeat center; height:200px; width:100%; }
 
 #wrapper { width:96%; margin-left:auto; margin-right:auto; border:1px solid black; height:auto;}
 
