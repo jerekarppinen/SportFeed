@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <html>
 <head>
 <link rel="stylesheet" href="<?php echo base_url();?>application/css/styles.css"> 
@@ -15,20 +15,20 @@
 	  itemSelector: '.item'
 	});
 </script>
-<a id="banner" href="index.php"></a>
+<a id="banner" href="<?php echo base_url();?>index.php/site/"></a>
 <div id="wrapper" class="clearfix">
 	<ul id="navbox" class="clearfix">
-		<li><a href="<?php echo base_url();?>index.php/site/">Etusivu</a></li>
-		<li><a href="<?php echo base_url();?>index.php/site/mlb">MLB</a></li>
-		<li><a href="<?php echo base_url();?>index.php/site/nfl">NFL</a></li>
-		<li><a href="<?php echo base_url();?>index.php/site/nba">NBA</a></li>
-		<li><a href="<?php echo base_url();?>index.php/site/nhl">NHL</a></li>
-		<li><a href="">Jokufutislol</a></li>
+		<li><a href="<?php echo base_url();?>index.php/site/"><strong>Etusivu</strong></a></li>
+		<li><a href="<?php echo base_url();?>index.php/site/mlb"><strong>MLB</strong></a></li>
+		<li><a href="<?php echo base_url();?>index.php/site/nfl"><strong>NFL</strong></a></li>
+		<li><a href="<?php echo base_url();?>index.php/site/nba"><strong>NBA</strong></a></li>
+		<li><a href="<?php echo base_url();?>index.php/site/nhl"><strong>NHL</strong></a></li>
+		<li><a href=""><strong>Jokufutislol</strong></a></li>
 	</ul>
 	<ul id="filter-container" class="clearfix">
 		<li><a href="">Uusimmat</a></li>
 		<li><a href="">Suosituimmat</a></li>
-		<li><a href="">Tyk�tyimm�t</a></li>
+		<li><a href="">Tykätyimmät</a></li>
 		<li><a href="">Paheksutuimmat</a></li>
 		<li><a href="">Kommentoiduimmat</a></li>
 	</ul>
