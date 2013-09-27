@@ -2,20 +2,15 @@
 body { margin:0; padding:0; }
 
 /*header part*/
-#banner { display:block; background:url('../images/banneri.jpg') no-repeat center; height:200px; width:100%; }
+#bannerHolder { margin-left:auto; margin-right:auto; width:96%; position:relative;}
+#banner { display:block; background:url('../images/banneri.jpg') no-repeat center; margin-left:auto; margin-right:auto; height:200px; width:1024px;}
+#loginControl  { position:absolute; top:60px; right:0; }
+#loginControl a, #loginControl input[type="submit"] {float:right; }
 
+/* content part */
 #wrapper { width:96%; margin-left:auto; margin-right:auto; border:1px solid black; height:auto;}
 
-.clearfix:after {
-	content: ".";
-	display: block;
-	height: 0;
-	overflow: hidden;
-}
-
-.clearfix:after {
-	clear: both;
-}
+.clearfix:after {content: "."; display: block; height: 0; overflow: hidden; clear: both; }
 
 #navbox { 
 	margin:0;
@@ -52,9 +47,7 @@ body { margin:0; padding:0; }
 #filter-container  li a:hover { color:#0040FF; }
 #filter-container  li a:active{ color:#000; }
 
-/*end of header */
-/*body*/
-#news-container { padding:10px; border:1px solid green; }
+#news-container { padding:10px; border:1px solid green; margin-left:20px; }
 
 .item {
   width: 240px;
@@ -66,4 +59,5 @@ body { margin:0; padding:0; }
   border-color: hsla(0, 0%, 0%, 0.5);
   border-radius: 5px;
 }
-.item p { margin: 1em;
+.item p { margin: 1em; }
+.item p:last-child { font-size:10pt;

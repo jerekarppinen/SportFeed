@@ -15,7 +15,13 @@
 	  itemSelector: '.item'
 	});
 </script>
-<a id="banner" href="<?php echo base_url();?>index.php/site/"></a>
+<div id="bannerHolder"> 
+	<a id="banner" href="<?php echo base_url();?>index.php/site/"></a> 
+	<div id="loginControl" class="clearfix"> 
+		<a href="">Register</a><br/><br/>
+		<form method="post"><input type="text"/><br/><input type="password"/><br/><input type="submit" name="log" value="Log in"/></form>
+	</div>
+</div>
 <div id="wrapper" class="clearfix">
 	<ul id="navbox" class="clearfix">
 		<li><a href="<?php echo base_url();?>index.php/site/"><strong>Etusivu</strong></a></li>
