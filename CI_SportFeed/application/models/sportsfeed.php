@@ -413,7 +413,18 @@ class Sportsfeed extends CI_Model {
 		$rss = $this->rssparser->getFeed(10);    
 		
 		return $rss;
-	}																																												
+	}
+	
+	// NHL-joukkueet
+	
+	function anaheim_ducks() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://ducks.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	}																																													
 }									
 
 

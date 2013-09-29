@@ -18,7 +18,7 @@
 <div id="header"> 
 	<a id="bannerHolder" href="<?php echo base_url();?>index.php/site/"><img id="banner" src="<?php echo base_url();?>/application/images/banneri.jpg" /></a> 
 	<div id="loginControl" class="clearfix"> 
-		<a href="">Register</a><br/><br/>
+		<a href="<?php echo base_url();?>index.php/user">Register</a><br/><br/>
 		<form method="post"><input type="text"/><br/><input type="password"/><br/><input type="submit" name="log" value="Log in"/></form>
 	</div>
 </div>
@@ -76,7 +76,11 @@
 				<li><a href="">Indiana Ilotytöt<a></li>
 			</ul>
 		</li>
-		<li><a href="<?php echo base_url();?>index.php/site/nhl"><strong>NHL</strong></a></li>
+		<li><a href="<?php echo base_url();?>index.php/site/nhl"><strong>NHL</strong></a>
+			<ul>
+				<li><a href="<?php echo base_url();?>index.php/site/anaheim_ducks">Anaheim Ducks</a></li>
+			</ul>
+		</li>
 		<li><a href=""><strong>Jokufutislol</strong></a>
 			<ul>
 				<li><a href="">Kakkapyllyt</a></li>

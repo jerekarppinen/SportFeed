@@ -42,6 +42,8 @@ class Site extends CI_Controller {
 		$this -> load -> view("home", $data);
 	}
 	
+	// NFL-joukkueet
+	
 	function arizona_cardinals() {
 		
 		$this -> load -> model('sportsfeed');
@@ -256,6 +258,16 @@ class Site extends CI_Controller {
 		
 		$this -> load -> model('sportsfeed');
 		$data['entries'] = $this -> sportsfeed -> washington_redskins();
+		$this -> load -> view("home", $data);
+	}
+	
+	
+	// NHL-joukkueet
+	
+	function anaheim_ducks() {
+		
+		$this -> load -> model('sportsfeed');
+		$data['entries'] = $this -> sportsfeed -> anaheim_ducks();
 		$this -> load -> view("home", $data);
 	}																
 											
