@@ -69,11 +69,36 @@
 		</li>
 		<li><a href="<?php echo base_url();?>index.php/site/nba"><strong>NBA</strong></a>
 			<ul>
-				<li><a href="">Atlanta Anustapit<a></li>
-				<li><a href="">Denver Dildot<a></li>
-				<li><a href="">Boston Berseet<a></li>
-				<li><a href="">Portland Pyllypojat<a></li>
-				<li><a href="">Indiana Ilotytöt<a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/bobcats">Bobcats</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/bucks">Bucks</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/bulls">Bulls</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/cavaliers">Cavaliers</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/celtics">Celtics</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/clippers">Clippers</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/grizzlies">Grizzlies</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/hawks">Hawks</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/heat">Heat</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/jazz">Jazz</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/kings">Kings</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/knicks">Knicks</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/lakers">Lakers</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/magic">Magic</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/mavericks">Mavericks</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/nets">Nets</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/nuggets">Nuggets</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/pacers">Pacers</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/pelicans">Pelicans</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/pistons">Pistons</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/raptors">Raptors</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/rockets">Rockets</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/sixers">Sixers</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/spurs">Spurs</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/suns">Suns</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/thunder">Thunder</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/trail_blazers">Trail Blazers</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/timberwolves">Timberwolves</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/warriors">Warriors</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/wizards">Wizards</a></li>
 			</ul>
 		</li>
 		<li><a href="<?php echo base_url();?>index.php/site/nhl"><strong>NHL</strong></a>
