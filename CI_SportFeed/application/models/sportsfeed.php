@@ -4,20 +4,6 @@ class Sportsfeed extends CI_Model {
 
 	function getGeneralMLB() {
 		
-		/*$q = $this->db->query("SELECT menunimi FROM hutasu_sivut WHERE taso = 'paavalikko';");
-		
-		if($q->num_rows() > 0)
-		{
-		
-			foreach ($q->result() as $row)
-			{
-				$data[] = $row;
-			}
-		
-		return $data;
-		
-		}*/
-		
 		$this->load->library('rssparser');                          // load library
 		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/mlb.xml');  // get feed
 		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
@@ -86,7 +72,6 @@ class Sportsfeed extends CI_Model {
 		}
 		
 		
-		//var_dump($return_array);
 		
 		// Sortataan pubDaten perusteella
 		
@@ -101,6 +86,11 @@ class Sportsfeed extends CI_Model {
 	}
 
 	// Joukkuekohtaiset feedit
+	/***********************************************************************************************************************************************
+	 * **********************************************************************************************************************************************
+	 * **********************************************************************************************************************************************
+	 * **********************************************************************************************************************************************
+	 */
 	// NFL
 
 	function arizona_cardinals() {
@@ -416,7 +406,18 @@ class Sportsfeed extends CI_Model {
 	}
 	
 	// NHL-joukkueet
-	
+	/***********************************************************************************************************************************************
+	 * **********************************************************************************************************************************************
+	 * **********************************************************************************************************************************************
+	 * **********************************************************************************************************************************************
+	 */
+	 
+	 // WESTERN
+	 /***************
+	  * *************
+	  */
+	  
+	  
 	function anaheim_ducks() {
 		$this->load->library('rssparser');                          // load library
 		$this->rssparser->set_feed_url('http://ducks.nhl.com/rss/news.xml');  // get feed
@@ -424,7 +425,274 @@ class Sportsfeed extends CI_Model {
 		$rss = $this->rssparser->getFeed(10);    
 		
 		return $rss;
-	}																																													
+	}
+	
+	function calgary_flames() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://flames.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	}	
+	
+	function chicago_blackhawks() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://blackhawks.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	}
+
+	function colorado_avalanche() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://avalanche.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	}
+
+	function dallas_stars() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://stars.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	}
+	
+	function edmonton_oilers() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://oilers.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	}
+	
+	function los_angeles_kings() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://kings.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	}
+	
+	function minnesota_wild() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://wild.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	}
+
+	function nashville_predators() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://predators.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	}
+	
+	function phoenix_coyotes() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://coyotes.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	}
+	
+	function san_jose_sharks() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://sharks.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	}
+
+	function st_louis_blues() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://blues.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	}
+	
+	function vancouver_canucks() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://canucks.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	}		
+	
+	function winnipeg_jets() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://jets.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	}
+	
+	
+	 // EASTERN
+	 /***************
+	  * *************
+	  */
+	  
+	function boston_bruins() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://bruins.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	}  
+
+	function buffalo_sabres() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://sabres.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	}  	
+	
+	function carolina_hurricanes() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://hurricanes.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	} 
+	
+	function columbus_blue_jackets() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://bluejackets.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	} 
+	
+	function detroit_red_wings() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://redwings.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	} 
+	
+	function florida_panthers() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://panthers.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	}
+	
+	function montreal_canadiens() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://canadiens.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	} 
+
+	function new_jersey_devils() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://devils.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	}  	 
+	
+	function new_york_islanders() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://islanders.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	} 
+
+	function new_york_rangers() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://rangers.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	}
+	
+	function ottawa_senators() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://senators.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	}
+	
+	function philadelphia_flyers() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://flyers.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	}
+	
+	function pittsburgh_penguins() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://penguins.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	} 
+	
+	function tampa_bay_lightning() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://lightning.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	} 
+
+	function toronto_maple_leafs() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://mapleleafs.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	} 
+	
+	function washington_capitals() {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://capitals.nhl.com/rss/news.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	}  	 	 	 	  	  	  	 		  	 	  																																																											
 }									
 
 
