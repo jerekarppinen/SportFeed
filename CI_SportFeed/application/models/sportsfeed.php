@@ -978,6 +978,15 @@ class Sportsfeed extends CI_Model {
 	 
 	 	// American League
 	 
+	function loadMLBTeamFeed($team) {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/'.$team.'.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	}
+
 	 function angels_of_anaheim() {
 		$this->load->library('rssparser');                          // load library
 		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/ana.xml');  // get feed

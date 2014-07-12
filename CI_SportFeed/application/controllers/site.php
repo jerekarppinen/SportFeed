@@ -42,6 +42,7 @@ class Site extends CI_Controller {
 		$this -> load -> view("home", $data);
 	}
 	
+
 	// NFL-joukkueet
 	
 	function arizona_cardinals() {
@@ -707,6 +708,15 @@ class Site extends CI_Controller {
 	 */
 	// American League
 	
+	//Hae MLB joukkueen rss feed
+	function getMLBTeam() {
+		$team = $_GET["abbr"];
+		$this -> load -> model('sportsfeed');
+		$data['entries'] = $this -> sportsfeed -> loadMLBTeamFeed($team);
+		$this -> load -> view("home", $data);
+	}
+
+
 	function angels_of_anaheim() {
 		
 		$this -> load -> model('sportsfeed');

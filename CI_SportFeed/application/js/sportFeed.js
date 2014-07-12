@@ -3,7 +3,7 @@
  
 	//list different sports' teams here
 	var mlbAL = { text: 'American League', divisions: {
-					east:{name: 'East', teams: [{team:'Baltimore Orioles', url:'index.php/site/baltimore_orioles'}, {team:'Boston Red Sox', url:'index.php/site/boston_red_sox'}, {team:'New York Yankees', url:'index.php/site/new_york_yankees'}, {team:'Tampa Bay Rays', url:'index.php/site/tampa_bay_rays'}, {team:'Toronto Blue Jays', url:'index.php/site/toronto_blue_jays'}]}, 
+					east:{name: 'East', teams: [{team:'Baltimore Orioles', url:'index.php/site/baltimore_orioles?abbr=bal'}, {team:'Boston Red Sox', url:'index.php/site/boston_red_sox'}, {team:'New York Yankees', url:'index.php/site/new_york_yankees'}, {team:'Tampa Bay Rays', url:'index.php/site/tampa_bay_rays'}, {team:'Toronto Blue Jays', url:'index.php/site/toronto_blue_jays'}]}, 
 					central:{name: 'Central', teams: [{team:'Chicago White Sox', url:'index.php/site/chicago_white_sox'}, {team:'Cleveland Indians', url:'index.php/site/cleveland_indians'}, {team:'Detroit Tigers', url:'index.php/site/detroit_tigers'}, {team:'Kansas City Royals', url:'index.php/site/kansas_city_royals'}, {team:'Minnesota Twins', url:'index.php/site/minnesota_twins'}]}, 
 					west:{name: 'West', teams: [{team:'Houston Astros', url:'index.php/site/houston_astros'}, {team:'Los Angeles Angels of Anaheim', url:'index.php/site/angels_of_anaheim'}, {team:'Oakland Athletics', url:'index.php/site/oakland_athletics'}, {team:'Seattle Mariners', url:'index.php/site/seattle_mariners'}, {team:'Texas Rangers', url:'index.php/site/texas_rangers'}]}}};
 	$scope.mlbAL = mlbAL;
