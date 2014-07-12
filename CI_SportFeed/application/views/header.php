@@ -1,12 +1,16 @@
 ﻿<!DOCTYPE HTML>
-<html>
+<html ng-app="SFApp">
 <head>
 <link rel="stylesheet" href="<?php echo base_url();?>application/css/styles.css"> 
 <script type="text/javascript" src="<?php echo base_url();?>/application/libraries/jquery.203.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>/application/libraries/masonry.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>/application/libraries/angular.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>/application/libraries/angular-resource.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>/application/js/sportFeed.js"></script>
+
 <title>Sportster!</title>
 </head>
-<body>
+<body ng-controller="AppCtrl">
 <script type="text/javascript">
 	var contti = $('#news-container');
 	contti.masonry({
@@ -23,41 +27,17 @@
 	</div>
 </div>
 <div id="wrapper" class="clearfix">
+<!--<h2 ng-repeat="item in mlbNL.divisions.central">{{item.url}}</h2>-->
+
 	<ul id="navbox" class="clearfix">
 		<li><a href="<?php echo base_url();?>index.php/site/"><strong>Etusivu</strong></a></li>
-		<li><a href="<?php echo base_url();?>index.php/site/mlb"><strong>MLB</strong></a>
-				<ul>
-					<li><a href="<?php echo base_url();?>index.php/site/angels_of_anaheim">Los Angeles Angels of Anaheim</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/oakland_athletics">Oakland Athletics</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/toronto_blue_jays">Toronto Blue Jays</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/tampa_bay_rays">Tampa Bay Rays</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/cleveland_indians">Cleveland Indians</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/seattle_mariners">Seattle Mariners</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/baltimore_orioles">Baltimore Orioles</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/texas_rangers">Texas Rangers</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/boston_red_sox">Boston Red Sox</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/kansas_city_royals">Kansas City Royals</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/detroit_tigers">Detroit Tigers</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/minnesota_twins">Minnesota Twins</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/chicago_white_sox">Chicago White Sox</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/new_york_yankees">New York Yankees</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/houston_astros">Houston Astros</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/atlanta_braves">Atlanta Braves</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/milwaukee_brewers">Milwaukee Brewers</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/st_louis_cardinals">St Louis Cardinals</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/chicago_cubs">Chicago Cubs</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/arizona_diamondbacks">Arizona Diamondbacks</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/los_angeles_dodgers">Los Angeles Dodgers</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/san_francisco_giants">San Francisco Giants</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/miami_marlins">Miami Marlins</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/new_york_mets">New York Mets</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/washington_nationals">Washington Nationals</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/san_diego_padres">San Diego Padres</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/philadelphia_phillies">Philadelphia Phillies</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/pittsburgh_pirates">Pittsburgh Pirates</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/cincinnati_reds">Cincinnati Reds</a></li>
-					<li><a href="<?php echo base_url();?>index.php/site/colorado_rockies">Colorado Rockies</a></li>
+		<li class="mlb"><a href="<?php echo base_url();?>index.php/site/mlb"><strong>MLB</strong></a>
+			<div class="divisionholder">
+				<ul ng-repeat="division in mlbAL.divisions" class="divisions">
+					<strong>{{division.name}}</strong>
+					<li ng-repeat="item in division.teams"><a href="<?php echo base_url();?>{{item.url}}">{{item.team}}</a></li>
 				</ul>
+			</div>
 		</li>
 		<li><a href="<?php echo base_url();?>index.php/site/nfl"><strong>NFL</strong></a>
 				<ul>
