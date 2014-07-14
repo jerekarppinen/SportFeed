@@ -48,7 +48,7 @@ class Site extends CI_Controller {
 			$insert = $this->rss_db_model->insertLatestNews($entries, $sport_id, $latestNewsTimestamp);
 		}
 
-		$data["news"] = $this->rss_db_model->getNewsFromDB($sport_id);
+		$data["entries"] = $this->rss_db_model->getNewsFromDB($sport_id);
 		
 
 		$this -> load -> view("home", $data);
