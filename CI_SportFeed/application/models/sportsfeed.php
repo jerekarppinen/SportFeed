@@ -4,11 +4,13 @@ class Sportsfeed extends CI_Model {
 
 	function getGeneralMLB() {
 		
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/mlb.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);                        // Get six items from the feed
-		
+		//$this->load->library('rssparser');                          // load library
+		//$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/mlb.xml');  // get feed
+		//$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		//$rss = $this->rssparser->getFeed(10);                        // Get six items from the feed
+
+		$feed = "http://mlb.mlb.com/partnerxml/gen/news/rss/mlb.xml";
+		$rss = simplexml_load_file($feed);
 		return $rss;
 	}
 	

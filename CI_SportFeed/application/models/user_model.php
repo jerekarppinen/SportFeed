@@ -6,7 +6,7 @@ class User_model extends CI_Model {
 		
 		$sha1_password = sha1($password);
 		
-		$q = "INSERT INTO users (username, password, email, activation_code) VALUES (?, ?, ?, ?)";
-		$this->db->query($q, array($username, $sha1_password, $email, $activation_code));
+		$q = "INSERT INTO users (username, password, email, activation_code, time_added) VALUES (?, ?, ?, ?, ?)";
+		$this->db->query($q, array($username, $sha1_password, $email, $activation_code, time()));
 	}
 }

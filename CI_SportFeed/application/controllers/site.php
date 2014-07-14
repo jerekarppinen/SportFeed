@@ -17,7 +17,40 @@ class Site extends CI_Controller {
 	function mlb() {
 		
 		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> getGeneralMLB();
+		$entries = $this -> sportsfeed -> getGeneralMLB();
+
+		// Call model to perform db queries for RSS
+		$this -> load -> model('rss_db_model');
+
+		// Define sport for database query, taken from uri
+		$sport = $this->uri->segments[2];
+
+		// Get sport_id for db queries
+		$sport_id = $this->rss_db_model->getSportId($sport);
+		
+		// true if empty, false if not
+		$empty = $this->rss_db_model->checkIfEmpty($sport_id);	
+
+		if($empty == true)
+		{
+			// If there are no news, we don't have to compare timestamps
+			// Just insert them mothafuckas
+			// true if success, false if something went wrong
+			$insert = $this->rss_db_model->insertNews($entries, $sport_id);
+
+		}
+		elseif($empty == false)
+		{
+			$latestNewsTimestamp = $this->rss_db_model->latestNewsTimestamp($sport_id);
+
+			// Not empty, insert only new news
+			// true if success, false if something went wrong
+			$insert = $this->rss_db_model->insertLatestNews($entries, $sport_id, $latestNewsTimestamp);
+		}
+
+		$data["news"] = $this->rss_db_model->getNewsFromDB($sport_id);
+		
+
 		$this -> load -> view("home", $data);
 	}
 	
