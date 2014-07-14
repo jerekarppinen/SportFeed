@@ -77,7 +77,12 @@ class Site extends CI_Controller {
 	
 
 	// NFL-joukkueet
-	
+	function nflteam() {
+		$team = $_GET["abbr"];
+		$this -> load -> model('sportsfeed');
+		$data['entries'] = $this -> sportsfeed -> loadNFLTeamFeed($team);
+		$this -> load -> view("home", $data);
+	}
 	function arizona_cardinals() {
 		
 		$this -> load -> model('sportsfeed');
@@ -741,7 +746,7 @@ class Site extends CI_Controller {
 	 */
 	
 	//Hae MLB joukkueen rss feed
-	function team() {
+	function mlbteam() {
 		$team = $_GET["abbr"];
 		$this -> load -> model('sportsfeed');
 		$data['entries'] = $this -> sportsfeed -> loadMLBTeamFeed($team);

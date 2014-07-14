@@ -1,7 +1,14 @@
 $(document).ready(function() { 
 //Dropdown menu jää roikkumaan hetkeksi kun hiiri poistuu. Alla oleva linkki auttoi
 	//http://stackoverflow.com/questions/1273566/how-do-i-check-if-the-mouse-is-over-an-element-in-jquery
-	$('#navbox li a').mouseenter(function() { 
+	var menusOn = 0;
+	$('#navbox li a.navlink').mouseenter(function() { 
+		//urheilulajilinkkejä selatessa nopeasti hover menut pois tieltä
+		$('.teamscontainer').each(function() {
+			if($(this).css('display') === "block") 
+				$(this).fadeOut('fast');
+		});
+
 		clearTimeout($(this).data('timeoutId')); //ajastin pois kun linkin päällä
 		var parent = $(this).parent(),
 			left = ($(this).offset().left + $(this).width() +5 )+'px',
