@@ -1,6 +1,6 @@
 ﻿<?php include("header.php"); ?>
 
-<div id="news-container clearfix" class="js-masonry">
+<div id="news-container" class="js-masonry clearfix">
 
 <?php if(isset($entries)) {
 							 foreach($entries as $entry) : ?>
@@ -15,7 +15,7 @@
 							</div>
 <?php endforeach; } ?>
 
-</div>
+</div> <!--wrapper -->
 
 
 

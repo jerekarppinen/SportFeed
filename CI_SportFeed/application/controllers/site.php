@@ -706,127 +706,14 @@ class Site extends CI_Controller {
 	/* ***************************************************************
 	 * 
 	 */
-	// American League
 	
 	//Hae MLB joukkueen rss feed
-	function getMLBTeam() {
+	function team() {
 		$team = $_GET["abbr"];
 		$this -> load -> model('sportsfeed');
 		$data['entries'] = $this -> sportsfeed -> loadMLBTeamFeed($team);
 		$this -> load -> view("home", $data);
 	}
-
-	
-	// National League
-	
-
-	function atlanta_braves() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> atlanta_braves();
-		$this -> load -> view("home", $data);
-	}
-	
-	function milwaukee_brewers() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> milwaukee_brewers();
-		$this -> load -> view("home", $data);
-	}
-	
-	function st_louis_cardinals() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> st_louis_cardinals();
-		$this -> load -> view("home", $data);
-	}
-	
-	function chicago_cubs() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> chicago_cubs();
-		$this -> load -> view("home", $data);
-	}	
-	
-	function arizona_diamondbacks() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> arizona_diamondbacks();
-		$this -> load -> view("home", $data);
-	}	
-	
-	function los_angeles_dodgers() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> los_angeles_dodgers();
-		$this -> load -> view("home", $data);
-	}
-	
-	function san_francisco_giants() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> san_francisco_giants();
-		$this -> load -> view("home", $data);
-	}
-	
-	function miami_marlins() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> miami_marlins();
-		$this -> load -> view("home", $data);
-	}	
-	
-	function new_york_mets() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> new_york_mets();
-		$this -> load -> view("home", $data);
-	}	
-	
-	function washington_nationals() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> washington_nationals();
-		$this -> load -> view("home", $data);
-	}	
-	
-	function san_diego_padres() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> san_diego_padres();
-		$this -> load -> view("home", $data);
-	}	
-	
-	function philadelphia_phillies() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> philadelphia_phillies();
-		$this -> load -> view("home", $data);
-	}
-	
-	function pittsburgh_pirates() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> pittsburgh_pirates();
-		$this -> load -> view("home", $data);
-	}
-	
-	function cincinnati_reds() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> cincinnati_reds();
-		$this -> load -> view("home", $data);
-	}	
-	
-	function colorado_rockies() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> colorado_rockies();
-		$this -> load -> view("home", $data);
-	}																										
-
-																								  																			
-}																		  																			
-
-
+																					  																			
+}
 ?>
