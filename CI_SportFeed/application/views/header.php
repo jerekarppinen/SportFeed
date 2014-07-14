@@ -8,7 +8,9 @@
 <script type="text/javascript" src="<?php echo base_url();?>/application/libraries/masonry.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>/application/libraries/angular.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>/application/libraries/angular-resource.js"></script>
+
 <script type="text/javascript" src="<?php echo base_url();?>/application/js/sportFeed.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>/application/js/effects.js"></script>
 
 <title>Sportster!</title>
 </head>
@@ -21,62 +23,17 @@
 		  columnWidth: 200,
 		  itemSelector: '.item'
 		});
-		$('#navbox li a').mouseenter(function() { //mouseon '#navbox li .teamscontainer, #navbox li .teamscontainer ul'
-			//$('.teamscontainer').css('display','none');
-			clearTimeout($(this).data('timeoutId'));
-			var parent = $(this).parent(),
-				left = ($(this).offset().left + $(this).width() +5 )+'px',
-				top = $(this).position().top+'px';
-
-			parent.children('.teamscontainer').fadeIn('fast').css({ 'left': left, 'top':top});
-
-		}).mouseleave(function() {
-			var hoverelem = $(this),
-				timeoutId = setTimeout(function(){
-					            hoverelem.parent().children('.teamscontainer').fadeOut('fast');
-					        }, 450);
-				
-			//set the timeoutId, allowing us to clear this trigger if the mouse comes back over
-   			hoverelem.data('timeoutId', timeoutId);
-		});
-
-		$('.teamscontainer').mouseenter(function(){
-			clearTimeout($(this).parent().children('a').data('timeoutId'));
-		}).mouseleave(function() { 
-			var timeoutId = setTimeout(function(){
-					            $(this).fadeOut('fast');
-					        }, 450);
-			$(this).parent().children('a').data('timeoutId',timeoutId);
-			/*var thisTeams = $(this).parent().children('.teamscontainer');
-			console.log(thisTeams);
-			if(thisTeams.filter(":hover").length > 0) {
-				console.log("joo");
-			}
-				
-
-			else { thisTeams.fadeOut(''); }
-			*/
-
-		});
 	});
 </script>
 
 <div id="wrapper" class="clearfix">
-<!--<h2 ng-repeat="item in mlbNL.divisions.central">{{item.url}}</h2>-->
 
 	<div id="header"> 
-	<!--<a id="bannerHolder" href="<?php echo base_url();?>index.php/site/"><img id="banner" src="<?php echo base_url();?>/application/images/banneri.jpg" /></a> 
-	-->
+
 	<h1 id="bannertext"><a href="<?php echo base_url();?>index.php/site/">Sports Lounge</a></h1>
 	
 	<ul id="navbox" class="clearfix">
 		<li class="mlb"><a href="<?php echo base_url();?>index.php/site/mlb"><strong>MLB</strong></a>
-			<!--<div class="divisionholder">
-				<ul ng-repeat="division in mlbAL.divisions" class="divisions">
-					<strong>{{division.name}}</strong>
-					<li ng-repeat="item in division.teams"><a href="<?php echo base_url();?>{{item.url}}">{{item.team}}</a></li>
-				</ul>
-			</div>-->
 			<div class="teamscontainer">
 				<ul ng-repeat="conference in mlb.conferences" class="conferenceholder">
 					<li class="conferencename"><strong>{{conference.text}}</strong></li>
