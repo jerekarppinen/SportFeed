@@ -1,83 +1,52 @@
 /* GENERAL STYLES */
-body { margin:0; padding:0; font-family: 'Muli', sans-serif; }
-
- #wrapper { min-width:837px; }
-
+* { margin:0; padding:0; 
+	/*Code below sets the width as defined and takes padding into consideration automatically*/
+	box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+}
+body {  font-family: 'Muli', sans-serif; }
+ul { list-style-type: none; }
 /*header part*/
 #header {
 	position:fixed;
+	top:0;
 	z-index:2;
-	width:370px;
+	width:400px;
 	background-color: #27ae60;
-	padding-left: 30px;
+	padding: 10px 0 0 30px;
+	height:100%;
 }
-#bannertext { font-size: 42px; color:#5882FA; margin-top: 0; display:inline-block;}
+#bannertext { font-size: 42px; color:#5882FA;}
 #bannertext a:link, #bannertext a:visited { text-decoration:none; color:#FFF; }  /*sininen väri #5882FA*/
 
-#loginControl  { margin-top:3em; }
+#navbox {   padding-top:20px; }
 
-/*ye olde stuff */
-#bannerHolder  {
-	display:block;  
-	margin-left:auto; 
-	margin-right:auto; 
-	height:130px; 
-	width:60%;
-	max-width:855px; 
-	min-width:505px;
-
-}
-#banner {width:100%;}
-
-
-/* content part */
-#wrapper { width:100%; height:100%; margin-left:auto; margin-right:auto; margin-top:0;}
-
-.clearfix:after {content: "."; display: block; height: 0;  clear: both; }
-
-#navbox { list-style-type: none;  padding:0;}
-
-#naxbox ul li {white-space:nowrap;}
+.divisions li {white-space:nowrap;}
 #navbox  li a:link, #navbox  li a:visited { text-decoration:none; color:#FFF;}  /*sininen väri #5882FA*/
 #navbox  li a:hover { color:#315FDF; } 
-#navbox  li a:active { color:#000; }
-#navbox li ul { display:inherit; white-space:nowrap; list-style-type:none;}
+#navbox li ul { display:inherit; white-space:nowrap; }
 
-.teamscontainer {position:fixed; display:none;  background-color: #0D833F; border:1px solid #000;}
+.teamscontainer {position:fixed; display:none;background-color: #0D833F; border:1px solid #000;}
 .teamscontainer .conferenceholder {display:inherit;  padding:0;}
 
 #navbox .conferencename {text-align: center;}
 #navbox .conferenceholder li a{  white-space:nowrap; }
 #navbox .divisions { position:static;
-			 list-style-type:none; padding:0; float:left; }
+			 padding:0; float:left; }
 
 #navbox .mlb .divisions { min-width:33%; }
 #navbox .nfl .divisions { width:25%; }
+#navbox .nba .divisions { min-width:33%; }
 
-/*
-#navbox { 
-	margin:0;
-	padding:0;
-	padding:7px 0 7px 0;
-	width:100%;
-	text-align:center;
-	list-style-type: none; 
-	font-size:16px;
-	
-}
-#navbox li { display:inline-block; margin-left:20px; position:relative;}
 
-			
-#navbox .mlb:hover .divisionholder{ display:block;  }
-.divisionholder{position:absolute; left:-180px; min-width:400px; background-color:#A4A4A4;  z-index:100; display:none;}
-#navbox .mlb ul { border:1px solid #777777; position:static;
-			 list-style-type:none; padding:0; float:left; }
+#loginControl  { margin-top:3em; }
 
-#navbox li ul li { display:inline-block; white-space:nowrap; margin:0; width:100%; border-bottom:1px solid #555555; padding:3px;}
-#navbox li ul li:last-child { border:none; }
 
-*/
+/* content part */
+#wrapper { width:100%; height:100%; margin-left:auto; margin-right:auto; padding-left:400px;}
 
+.clearfix:after {content: "."; display: block; height: 0;  clear: both; }
 
 
 #filter-container { 
@@ -86,7 +55,6 @@ body { margin:0; padding:0; font-family: 'Muli', sans-serif; }
 	margin-right:auto; 
 	padding:0; 
 	margin-bottom:2em;
-	list-style-type: none; 
 }
 #filter-container  li { 
 	display:inline-block; 
@@ -99,7 +67,7 @@ body { margin:0; padding:0; font-family: 'Muli', sans-serif; }
 #filter-container  li a:hover { color:#0040FF; }
 #filter-container  li a:active{ color:#000; }
 
-#news-container { padding:10px; margin-left:420px; }
+#news-container { padding:10px; }
 
 .item {
   width: 240px;

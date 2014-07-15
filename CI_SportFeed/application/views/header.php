@@ -13,8 +13,6 @@
 <script type="text/javascript" src="<?php echo base_url();?>/application/js/effects.js"></script>
 
 <title>Sportster!</title>
-</head>
-<body ng-controller="AppCtrl">
 <script type="text/javascript">
 	$(document).ready(function() { 
 		var contti = $('#news-container');
@@ -26,9 +24,10 @@
 	});
 </script>
 
-<div id="wrapper" class="clearfix">
+</head>
+<body ng-controller="AppCtrl">
 
-	<div id="header"> 
+<div id="header"> 
 
 	<h1 id="bannertext"><a href="<?php echo base_url();?>index.php/site/index/">Sports Lounge</a></h1>
 	
@@ -59,6 +58,7 @@
 				</ul>
 			</div>
 		</li>
+<<<<<<< HEAD
 		<li><a class="navlink" href="<?php echo base_url();?>index.php/site/index/nba"><strong>NBA</strong></a>
 			<ul>
 				<li><a href="<?php echo base_url();?>index.php/site/index/bobcats">Bobcats</a></li>
@@ -92,6 +92,20 @@
 				<li><a href="<?php echo base_url();?>index.php/site/index/warriors">Warriors</a></li>
 				<li><a href="<?php echo base_url();?>index.php/site/index/wizards">Wizards</a></li>
 			</ul>
+=======
+		<li class="nba"><a class="navlink" href="<?php echo base_url();?>index.php/site/nba"><strong>NBA</strong></a>
+			<div class="teamscontainer">
+				<ul ng-repeat="conference in nba.conferences" class="conferenceholder">
+					<li class="conferencename"><strong>{{conference.text}}</strong></li>
+					<li class="clearfix">
+						<ul ng-repeat="division in conference.divisions" class="divisions">
+							<strong>{{division.name}}</strong>
+							<li ng-repeat="item in division.teams"><a href="<?php echo base_url();?>{{item.url}}">{{item.team}}</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+>>>>>>> 927a137827f75452edc7628b9873b6152c01e7c5
 		</li>
 		<li><a class="navlink" href="<?php echo base_url();?>index.php/site/index/nhl"><strong>NHL</strong></a>
 			<ul>
@@ -145,3 +159,4 @@
 	</form>
 
 </div>
+<div id="wrapper" class="clearfix">
