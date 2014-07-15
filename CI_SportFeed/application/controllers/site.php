@@ -76,6 +76,10 @@ class Site extends CI_Controller {
 	}
 	
 
+	//####################
+
+	//Joukkuehaut
+
 	// NFL-joukkueet
 	function nflteam() {
 		$team = $_GET["abbr"];
@@ -84,6 +88,22 @@ class Site extends CI_Controller {
 		$this -> load -> view("home", $data);
 	}
 	
+	//Hae MLB joukkueen rss feed
+	function nbateam() {
+		$team = $_GET["abbr"];
+		$this -> load -> model('sportsfeed');
+		$data['entries'] = $this -> sportsfeed -> loadNBATeamFeed($team);
+		$this -> load -> view("home", $data);
+	}	
+
+	//Hae MLB joukkueen rss feed
+	function mlbteam() {
+		$team = $_GET["abbr"];
+		$this -> load -> model('sportsfeed');
+		$data['entries'] = $this -> sportsfeed -> loadMLBTeamFeed($team);
+		$this -> load -> view("home", $data);
+	}
+			
 	
 	// NHL-joukkueet
 	
@@ -307,235 +327,6 @@ class Site extends CI_Controller {
 		$data['entries'] = $this -> sportsfeed -> washington_capitals();
 		$this -> load -> view("home", $data);
 	}
-	
-	
-	// NBA
-	/* ***************************************************************
-	 * 
-	 */
-	 
-	function bobcats() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> bobcats();
-		$this -> load -> view("home", $data);
-	}
-
-	function bucks() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> bucks();
-		$this -> load -> view("home", $data);
-	}
-	
-	function bulls() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> bulls();
-		$this -> load -> view("home", $data);
-	}
-	
-	function cavaliers() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> cavaliers();
-		$this -> load -> view("home", $data);
-	}
-	
-	function celtics() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> celtics();
-		$this -> load -> view("home", $data);
-	}
-	
-	function clippers() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> clippers();
-		$this -> load -> view("home", $data);
-	}
-	
-	function grizzlies() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> grizzlies();
-		$this -> load -> view("home", $data);
-	}	
-	
-	function hawks() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> hawks();
-		$this -> load -> view("home", $data);
-	}	
-	
-	function heat() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> heat();
-		$this -> load -> view("home", $data);
-	}	
-	
-	function jazz() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> jazz();
-		$this -> load -> view("home", $data);
-	}																 	
-		
-	function kings() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> kings();
-		$this -> load -> view("home", $data);
-	}	
-	
-	function knicks() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> knicks();
-		$this -> load -> view("home", $data);
-	}			
-	
-	function lakers() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> lakers();
-		$this -> load -> view("home", $data);
-	}	
-	
-	function magic() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> magic();
-		$this -> load -> view("home", $data);
-	}	
-	
-	function mavericks() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> mavericks();
-		$this -> load -> view("home", $data);
-	}	
-	
-	function nets() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> nets();
-		$this -> load -> view("home", $data);
-	}	
-	
-	function nuggets() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> nuggets();
-		$this -> load -> view("home", $data);
-	}	
-	
-	function pacers() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> pacers();
-		$this -> load -> view("home", $data);
-	}	
-	
-	function pelicans() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> pelicans();
-		$this -> load -> view("home", $data);
-	}	
-	
-	function pistons() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> pistons();
-		$this -> load -> view("home", $data);
-	}	
-	
-	function raptors() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> raptors();
-		$this -> load -> view("home", $data);
-	}
-	
-	function rockets() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> rockets();
-		$this -> load -> view("home", $data);
-	}	
-	
-	function sixers() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> sixers();
-		$this -> load -> view("home", $data);
-	}	
-	
-	function spurs() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> spurs();
-		$this -> load -> view("home", $data);
-	}	
-	
-	function suns() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> suns();
-		$this -> load -> view("home", $data);
-	}
-	
-	function thunder() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> thunder();
-		$this -> load -> view("home", $data);
-	}	
-	
-	function trail_blazers() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> trail_blazers();
-		$this -> load -> view("home", $data);
-	}	
-	
-	function timberwolves() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> timberwolves();
-		$this -> load -> view("home", $data);
-	}	
-	
-	function warriors() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> warriors();
-		$this -> load -> view("home", $data);
-	}	
-	
-	function wizards() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> wizards();
-		$this -> load -> view("home", $data);
-	}	
-
-	// MLB
-	/* ***************************************************************
-	 * 
-	 */
-	
-	//Hae MLB joukkueen rss feed
-	function mlbteam() {
-		$team = $_GET["abbr"];
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> loadMLBTeamFeed($team);
-		$this -> load -> view("home", $data);
-	}
-																					  																			
+																	  																			
 }
 ?>

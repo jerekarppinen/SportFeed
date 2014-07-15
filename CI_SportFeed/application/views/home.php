@@ -15,7 +15,7 @@
 							</div>
 <?php endforeach; } ?>
 
-</div> <!--wrapper -->
+</div>
 
 
 

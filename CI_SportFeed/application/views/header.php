@@ -13,8 +13,6 @@
 <script type="text/javascript" src="<?php echo base_url();?>/application/js/effects.js"></script>
 
 <title>Sportster!</title>
-</head>
-<body ng-controller="AppCtrl">
 <script type="text/javascript">
 	$(document).ready(function() { 
 		var contti = $('#news-container');
@@ -26,9 +24,10 @@
 	});
 </script>
 
-<div id="wrapper" class="clearfix">
+</head>
+<body ng-controller="AppCtrl">
 
-	<div id="header"> 
+<div id="header"> 
 
 	<h1 id="bannertext"><a href="<?php echo base_url();?>index.php/site/">Sports Lounge</a></h1>
 	
@@ -59,39 +58,18 @@
 				</ul>
 			</div>
 		</li>
-		<li><a class="navlink" href="<?php echo base_url();?>index.php/site/nba"><strong>NBA</strong></a>
-			<ul>
-				<li><a href="<?php echo base_url();?>index.php/site/bobcats">Bobcats</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/bucks">Bucks</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/bulls">Bulls</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/cavaliers">Cavaliers</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/celtics">Celtics</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/clippers">Clippers</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/grizzlies">Grizzlies</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/hawks">Hawks</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/heat">Heat</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/jazz">Jazz</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/kings">Kings</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/knicks">Knicks</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/lakers">Lakers</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/magic">Magic</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/mavericks">Mavericks</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/nets">Nets</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/nuggets">Nuggets</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/pacers">Pacers</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/pelicans">Pelicans</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/pistons">Pistons</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/raptors">Raptors</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/rockets">Rockets</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/sixers">Sixers</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/spurs">Spurs</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/suns">Suns</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/thunder">Thunder</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/trail_blazers">Trail Blazers</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/timberwolves">Timberwolves</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/warriors">Warriors</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/wizards">Wizards</a></li>
-			</ul>
+		<li class="nba"><a class="navlink" href="<?php echo base_url();?>index.php/site/nba"><strong>NBA</strong></a>
+			<div class="teamscontainer">
+				<ul ng-repeat="conference in nba.conferences" class="conferenceholder">
+					<li class="conferencename"><strong>{{conference.text}}</strong></li>
+					<li class="clearfix">
+						<ul ng-repeat="division in conference.divisions" class="divisions">
+							<strong>{{division.name}}</strong>
+							<li ng-repeat="item in division.teams"><a href="<?php echo base_url();?>{{item.url}}">{{item.team}}</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
 		</li>
 		<li><a class="navlink" href="<?php echo base_url();?>index.php/site/nhl"><strong>NHL</strong></a>
 			<ul>
@@ -145,3 +123,4 @@
 	</form>
 
 </div>
+<div id="wrapper" class="clearfix">
