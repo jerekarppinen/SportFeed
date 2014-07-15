@@ -2,24 +2,81 @@
 
 class Site extends CI_Controller {
 
-	function index() {
+	public function index($sport = "", $team = "")
+	{
+
+		// Loading models
+		$this->load->model('sportsfeed');
+		$this->load->model('rss_db_model');
 		
-		$this -> AllFeeds();
+		if($sport == "" && $team == "")
+		{	
+
+			// Read rss feeds and commit updates if necessary
+			$this->sportsfeed->updateAllFeeds();
+
+			// Get news from DB
+			//$feedsCombined = $this->rss_db_model->getAllNewsFromDB();
+
+			// Serve news to client side
+			// echo json_encode($feedsCombined);
+
+			// this row and "data" attribute from below can be removed when client side accepts json encoded data
+			$data["entries"] = $this->rss_db_model->getAllNewsFromDB();
+
+			$this->load->view("home", $data);
+		}
+		else
+		{
+			if($team == "")
+			{
+				// Read rss feed for specific sport and commit updates if necessary
+				$this->sportsfeed->updateSportFeed($sport);
+
+				// Get sport_id for db queries
+				$sport_id = $this->rss_db_model->getSportId($sport);
+
+				// Get news from DB
+				//$feedsCombined = $this->rss_db_model->getAllNewsFromDB();
+
+				// Serve news to client side
+				// echo json_encode($feedsCombined);
+
+				// this row and "data" attribute from below can be removed when client side accepts json encoded data
+				$data["entries"] = $this->rss_db_model->getNewsFromDB($sport_id);
+
+				$this->load->view("home", $data);	
+			}
+			else
+			{
+				
+				$this->sportsfeed->updateTeamFeed($team, $sport);
+
+
+
+				$team_id = $this->rss_db_model->getTeamId($team, $sport);
+
+				$data["entries"] = $this->rss_db_model->getTeamNewsFromDB($team_id);
+
+				$this->load->view("home", $data);
+
+			}
+
+		
+		}
+
+		
 	}
 	
-	function AllFeeds() {
-		
-		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> AllFeeds();
-		$this -> load -> view("home", $data);
-	}
 	
-	function mlb() {
+	/*function mlb() {
 		
 		$this -> load -> model('sportsfeed');
 		$entries = $this -> sportsfeed -> getGeneralMLB();
 
-		// Call model to perform db queries for RSS
+		print_r($entries);
+
+	/*	// Call model to perform db queries for RSS
 		$this -> load -> model('rss_db_model');
 
 		// Define sport for database query, taken from uri
@@ -51,28 +108,32 @@ class Site extends CI_Controller {
 		$data["entries"] = $this->rss_db_model->getNewsFromDB($sport_id);
 		
 
-		$this -> load -> view("home", $data);
-	}
-	
+		$this -> load -> view("home", $data); */
+	//}
+	/*
 	function nfl() {
 		
 		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> getGeneralNFL();
-		$this -> load -> view("home", $data);
-	}
+		$entries = $this -> sportsfeed -> getGeneralNFL();
+		print_r($entries);
+		//$this -> load -> view("home", $data);
+	}*/
 	
-	function nba() {
+	/*function nba() {
 		
 		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> getGeneralNBA();
-		$this -> load -> view("home", $data);
+		$entries = $this -> sportsfeed -> getGeneralNBA();
+		print_r($entries);
+		//$this -> load -> view("home", $data);
 	}
+
 
 	function nhl() {
 		
 		$this -> load -> model('sportsfeed');
-		$data['entries'] = $this -> sportsfeed -> getGeneralNHL();
-		$this -> load -> view("home", $data);
+		$entries = $this -> sportsfeed -> getGeneralNHL();
+		print_r($entries);
+		//$this -> load -> view("home", $data);
 	}
 	
 

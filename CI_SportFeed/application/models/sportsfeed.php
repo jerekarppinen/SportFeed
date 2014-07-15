@@ -2,15 +2,146 @@
 
 class Sportsfeed extends CI_Model {
 
+	public function updateTeamFeed($team, $sport)
+	{
+		$this->load->library('rssparser');
+		$this->load->model('rss_db_model');
+
+		$data = $this->rss_db_model->getSportIdByTeamAndSport($team, $sport);
+
+		$sport_id = $data->sport_id;
+
+		// Form the url
+		if($sport == "mlb")
+		{
+			$url = "http://partner.mlb.com/partnerxml/gen/news/rss/".$team.".xml";
+		}
+		if($sport == "nfl")
+		{
+			$url = "http://www.nfl.com/rss/rsslanding?searchString=team&abbr=".$team;
+		}
+		
+		
+
+
+		$this->rssparser->set_feed_url($url);
+		$this->rssparser->set_cache_life(30);
+		$result = $this->rssparser->getFeed(10); 	
+
+		$team_id = $this->rss_db_model->getTeamId($team, $sport);
+
+
+		$empty = $this->rss_db_model->checkIfEmptyTeam($team_id);	
+
+		if($empty == true)
+		{
+			// Insert all the news, ignore latest timestamp
+			$this->rss_db_model->insertTeamNews($result, $sport_id, $team_id);
+		}
+
+		elseif($empty == false)
+		{
+			$latestTeamNewsTimestamp = $this->rss_db_model->latestTeamNewsTimestamp($team_id);
+			// Not empty, insert only new news
+			// true if success, false if something went wrong
+			$insert = $this->rss_db_model->insertLatestTeamNews($result, $sport_id, $latestTeamNewsTimestamp, $team_id);					
+		}			
+
+	}
+
+	public function updateSportFeed($sport)
+	{
+		$this->load->library('rssparser');
+		$this->load->model('rss_db_model');
+
+		// Get RSS feed url from db
+		$url = $this->db->query("SELECT sport_id, feed FROM sport WHERE sport = '".$sport."';")->row();
+
+		$feed = $url->feed;
+		$sport_id = $url->sport_id;
+
+		$this->rssparser->set_feed_url($feed);
+		$this->rssparser->set_cache_life(30);
+		$result = $this->rssparser->getFeed(10); 
+
+		// Check if db is empty regarding the sport_id
+		$empty = $this->rss_db_model->checkIfEmpty($sport_id);
+
+		if($empty == true)
+		{
+			// Insert all the news, ignore latest timestamp
+			$this->rss_db_model->insertNews($result, $url->sport_id);
+		}
+		elseif($empty == false)
+		{
+			$latestNewsTimestamp = $this->rss_db_model->latestNewsTimestamp($sport_id);
+				
+			// Not empty, insert only new news
+			// true if success, false if something went wrong
+			$insert = $this->rss_db_model->insertLatestNews($result, $sport_id, $latestNewsTimestamp);					
+		}		
+	}
+	
+	public function updateAllFeeds()
+	{
+		
+		$this->load->library('rssparser');
+		$this->load->model('rss_db_model');
+		
+		// For testing purposes	
+		/*	$urls = array('http://mlb.mlb.com/partnerxml/gen/news/rss/mlb.xml',
+					     'http://www.nfl.com/rss/rsslanding?searchString=home',
+					     'http://www.nba.com/rss/nba_rss.xml',
+					     'http://www.nhl.com/rss/news.xml');*/
+
+		
+		// Get RSS feed urls from db
+		$urls = $this->db->query("SELECT sport_id, feed FROM sport;")->result();
+
+		
+		// Loop urls and take content to db if necessary
+		foreach($urls as $url)
+		{
+
+			$this->rssparser->set_feed_url($url->feed);
+			$this->rssparser->set_cache_life(30);
+			$result = $this->rssparser->getFeed(10); 	
+
+			// Check if db is empty regarding the sport_id
+			$empty = $this->rss_db_model->checkIfEmpty($url->sport_id);
+
+			if($empty == true)
+			{
+				// Insert all the news, ignore latest timestamp
+				$this->rss_db_model->insertNews($result, $url->sport_id);
+			}
+			elseif($empty == false)
+			{
+				$latestNewsTimestamp = $this->rss_db_model->latestNewsTimestamp($url->sport_id);
+					
+				// Not empty, insert only new news
+				// true if success, false if something went wrong
+				$insert = $this->rss_db_model->insertLatestNews($result, $url->sport_id, $latestNewsTimestamp);					
+			}
+
+		}
+
+	}
+
+
+
+
+
+	/*
 	function getGeneralMLB() {
 		
-		//$this->load->library('rssparser');                          // load library
-		//$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/mlb.xml');  // get feed
-		//$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		//$rss = $this->rssparser->getFeed(10);                        // Get six items from the feed
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/mlb.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);                        // Get six items from the feed
 
-		$feed = "http://mlb.mlb.com/partnerxml/gen/news/rss/mlb.xml";
-		$rss = simplexml_load_file($feed);
+		//$feed = "http://mlb.mlb.com/partnerxml/gen/news/rss/mlb.xml";
+		//$rss = simplexml_load_file($feed);
 		return $rss;
 	}
 	
@@ -42,50 +173,9 @@ class Sportsfeed extends CI_Model {
 		$rss = $this->rssparser->getFeed(10);    
 		
 		return $rss;
-	}
-	
-	function AllFeeds() {
-		
-		$this->load->library('rssparser');
-		
-		$fullarray = array();
-		
-		$rss = array('http://mlb.mlb.com/partnerxml/gen/news/rss/mlb.xml',
-				     'http://www.nfl.com/rss/rsslanding?searchString=home',
-				     'http://www.nba.com/rss/nba_rss.xml',
-				     'http://www.nhl.com/rss/news.xml');
-		
-		// Haetaan kaikkien rss-feedien uutiset yhteen taulukkoon			 
-		foreach($rss as $url) {
-			
-			$this->rssparser->set_feed_url($url);
-			$this->rssparser->set_cache_life(30);
-			$fullarray[] = $this->rssparser->getFeed(10); 
-		}
-		
-		// 2-ulotteinen taulukko on väärässä muodossa, joten se pitää muuttaa yksiulotteiseksi viewiä varten
-		
-		foreach($fullarray as $feed) {
-			
-			foreach($feed as $entry) {
-				
-				$return_array[] = $entry; 
-			}
-		}
-		
-		
-		
-		// Sortataan pubDaten perusteella
-		
-	function cmp($a, $b) {
-			$a_m = strtotime($a["pubDate"]);
-			$b_m = strtotime($b["pubDate"]);
-		return strcmp($b_m, $a_m);
-		}
-		usort($return_array,'cmp'); 
-		
-		return $return_array; 
-	}
+	} */
+
+
 
 	// Joukkuekohtaiset feedit
 	/***********************************************************************************************************************************************

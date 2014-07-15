@@ -30,10 +30,10 @@
 
 	<div id="header"> 
 
-	<h1 id="bannertext"><a href="<?php echo base_url();?>index.php/site/">Sports Lounge</a></h1>
+	<h1 id="bannertext"><a href="<?php echo base_url();?>index.php/site/index/">Sports Lounge</a></h1>
 	
 	<ul id="navbox" class="clearfix">
-		<li class="mlb"><a class="navlink" href="<?php echo base_url();?>index.php/site/mlb"><strong>MLB</strong></a>
+		<li class="mlb"><a class="navlink" href="<?php echo base_url();?>index.php/site/index/mlb"><strong>MLB</strong></a>
 			<div class="teamscontainer">
 				<ul ng-repeat="conference in mlb.conferences" class="conferenceholder">
 					<li class="conferencename"><strong>{{conference.text}}</strong></li>
@@ -46,7 +46,7 @@
 				</ul>
 			</div>
 		</li>
-		<li class="nfl"><a class="navlink" href="<?php echo base_url();?>index.php/site/nfl"><strong>NFL</strong></a>
+		<li class="nfl"><a class="navlink" href="<?php echo base_url();?>index.php/site/index/nfl"><strong>NFL</strong></a>
 			<div class="teamscontainer">
 				<ul ng-repeat="conference in nfl.conferences" class="conferenceholder">
 					<li class="conferencename"><strong>{{conference.text}}</strong></li>
@@ -59,71 +59,71 @@
 				</ul>
 			</div>
 		</li>
-		<li><a class="navlink" href="<?php echo base_url();?>index.php/site/nba"><strong>NBA</strong></a>
+		<li><a class="navlink" href="<?php echo base_url();?>index.php/site/index/nba"><strong>NBA</strong></a>
 			<ul>
-				<li><a href="<?php echo base_url();?>index.php/site/bobcats">Bobcats</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/bucks">Bucks</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/bulls">Bulls</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/cavaliers">Cavaliers</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/celtics">Celtics</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/clippers">Clippers</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/grizzlies">Grizzlies</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/hawks">Hawks</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/heat">Heat</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/jazz">Jazz</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/kings">Kings</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/knicks">Knicks</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/lakers">Lakers</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/magic">Magic</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/mavericks">Mavericks</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/nets">Nets</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/nuggets">Nuggets</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/pacers">Pacers</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/pelicans">Pelicans</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/pistons">Pistons</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/raptors">Raptors</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/rockets">Rockets</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/sixers">Sixers</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/spurs">Spurs</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/suns">Suns</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/thunder">Thunder</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/trail_blazers">Trail Blazers</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/timberwolves">Timberwolves</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/warriors">Warriors</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/wizards">Wizards</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/bobcats">Bobcats</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/bucks">Bucks</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/bulls">Bulls</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/cavaliers">Cavaliers</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/celtics">Celtics</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/clippers">Clippers</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/grizzlies">Grizzlies</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/hawks">Hawks</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/heat">Heat</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/jazz">Jazz</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/kings">Kings</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/knicks">Knicks</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/lakers">Lakers</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/magic">Magic</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/mavericks">Mavericks</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/nets">Nets</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/nuggets">Nuggets</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/pacers">Pacers</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/pelicans">Pelicans</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/pistons">Pistons</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/raptors">Raptors</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/rockets">Rockets</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/sixers">Sixers</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/spurs">Spurs</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/suns">Suns</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/thunder">Thunder</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/trail_blazers">Trail Blazers</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/timberwolves">Timberwolves</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/warriors">Warriors</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/wizards">Wizards</a></li>
 			</ul>
 		</li>
-		<li><a class="navlink" href="<?php echo base_url();?>index.php/site/nhl"><strong>NHL</strong></a>
+		<li><a class="navlink" href="<?php echo base_url();?>index.php/site/index/nhl"><strong>NHL</strong></a>
 			<ul>
-				<li><a href="<?php echo base_url();?>index.php/site/anaheim_ducks">Anaheim Ducks</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/calgary_flames">Calgary Flames</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/chicago_blackhawks">Chicago Blackhawks</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/colorado_avalanche">Colorado Avalanche</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/dallas_stars">Dallas Stars</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/edmonton_oilers">Edmonton Oilers</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/los_angeles_kings">Los Angeles Kings</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/minnesota_wild">Anaheim Ducks</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/nashville_predators">Nashville Predators</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/phoenix_coyotes">Phoenix Coyotes</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/san_jose_sharks">San Jose Sharks</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/st_louis_blues">St Louis Blues</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/vancouver_canucks">Vancouver Canucks</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/winnipeg_jets">Winnipeg Jets</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/boston_bruins">Boston Bruins</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/buffalo_sabres">Buffalo Sabres</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/carolina_hurricanes">Carolina Hurricanes</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/columbus_blue_jackets">Columbus Blue Jackets</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/florida_panthers">Florida Panthers</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/montreal_canadiens">Montreal Canadiens</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/new_jersey_devils">New Jersey Devils</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/new_york_islanders">New York Islanders</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/new_york_rangers">New York Rangers</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/ottawa_senators">Ottawa Senators</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/philadelphia_flyers">Philadelphia Flyers</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/pittsburgh_penguins">Pittsburgh Penguins</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/tampa_bay_lightning">Tampa Bay Lightning</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/toronto_maple_leafs">Toronto Maple Leafs</a></li>
-				<li><a href="<?php echo base_url();?>index.php/site/washington_capitals">Washington Capitals</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/anaheim_ducks">Anaheim Ducks</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/calgary_flames">Calgary Flames</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/chicago_blackhawks">Chicago Blackhawks</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/colorado_avalanche">Colorado Avalanche</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/dallas_stars">Dallas Stars</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/edmonton_oilers">Edmonton Oilers</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/los_angeles_kings">Los Angeles Kings</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/minnesota_wild">Anaheim Ducks</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/nashville_predators">Nashville Predators</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/phoenix_coyotes">Phoenix Coyotes</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/san_jose_sharks">San Jose Sharks</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/st_louis_blues">St Louis Blues</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/vancouver_canucks">Vancouver Canucks</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/winnipeg_jets">Winnipeg Jets</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/boston_bruins">Boston Bruins</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/buffalo_sabres">Buffalo Sabres</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/carolina_hurricanes">Carolina Hurricanes</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/columbus_blue_jackets">Columbus Blue Jackets</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/florida_panthers">Florida Panthers</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/montreal_canadiens">Montreal Canadiens</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/new_jersey_devils">New Jersey Devils</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/new_york_islanders">New York Islanders</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/new_york_rangers">New York Rangers</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/ottawa_senators">Ottawa Senators</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/philadelphia_flyers">Philadelphia Flyers</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/pittsburgh_penguins">Pittsburgh Penguins</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/tampa_bay_lightning">Tampa Bay Lightning</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/toronto_maple_leafs">Toronto Maple Leafs</a></li>
+				<li><a href="<?php echo base_url();?>index.php/site/index/washington_capitals">Washington Capitals</a></li>
 			</ul>
 		</li>
 	</ul>
