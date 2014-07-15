@@ -58,7 +58,7 @@
 				</ul>
 			</div>
 		</li>
-<<<<<<< HEAD
+
 		<li><a class="navlink" href="<?php echo base_url();?>index.php/site/index/nba"><strong>NBA</strong></a>
 			<ul>
 				<li><a href="<?php echo base_url();?>index.php/site/index/bobcats">Bobcats</a></li>
