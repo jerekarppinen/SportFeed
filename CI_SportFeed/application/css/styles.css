@@ -67,7 +67,7 @@ ul { list-style-type: none; }
 #filter-container  li a:hover { color:#0040FF; }
 #filter-container  li a:active{ color:#000; }
 
-#news-container { padding:10px; margin-left:420px; }
+#news-container { padding:10px; }
 
 .item {
   width: 240px;
