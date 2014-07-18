@@ -59,7 +59,7 @@
 			</div>
 		</li>
 
-		<li class="nba"><a class="navlink" href="<?php echo base_url();?>index.php/site/nba"><strong>NBA</strong></a>
+		<li class="nba"><a class="navlink" href="<?php echo base_url();?>index.php/site/index/nba"><strong>NBA</strong></a>
 			<div class="teamscontainer">
 				<ul ng-repeat="conference in nba.conferences" class="conferenceholder">
 					<li class="conferencename"><strong>{{conference.text}}</strong></li>
