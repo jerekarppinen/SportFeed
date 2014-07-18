@@ -1,4 +1,4 @@
-﻿<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html ng-app="SFApp">
 <head>
 <link rel="stylesheet" href="<?php echo base_url();?>application/css/styles.css"> 

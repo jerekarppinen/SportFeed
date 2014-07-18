@@ -1,4 +1,4 @@
-﻿<?php include("header.php"); ?>
+<?php include("header.php"); ?>
 
 <div id="news-container" class="js-masonry clearfix">
 
