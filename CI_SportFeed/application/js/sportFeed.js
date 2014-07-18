@@ -117,10 +117,104 @@
 							} };
 	$scope.nfl = nfl;
 
-	var nba = { conferences : { ec : { text:"Eastern Conference", divisions: {atlantic: { name: "Atlantic", teams: [{team:"Boston Celtics", url:"index.php/site/index/nba/celtics"},{team:"Brooklyn Nets", url:"index.php/site/index/nba/nets"},{team:"New York Knicks", url:"index.php/site/index/nba/knicks"},{team:"Philadelphia 76ers", url:"index.php/site/index/nba/sixers"},{team:"Toronto Raptors", url:"index.php/site/index/nba/raptors"}]},central: { name: "Central", teams: [{team:"Chicago Bulls", url:"index.php/site/index/nba/bulls"},{team:"Cleveland Cavaliers", url:"index.php/site/index/nba/cavaliers"},{team:"Detroit Pistons", url:"index.php/site/index/nba/pistons"},{team:"Indiana Pacers", url:"index.php/site/index/nba/pacers"},{team:"Milwaukee Bucks", url:"index.php/site/index/nba/bucks"}]},southeast: { name: "Southeast", teams: [{team:"Atlanta Hawks", url:"index.php/site/index/nba/hawks"},{team:"Charlotte Hornets", url:"index.php/site/index/nba/hornets"},{team:"Miami Heat", url:"index.php/site/index/nba/heat"},{team:"Orlando Magic", url:"index.php/site/index/nba/magic"},{team:"Washington Wizards", url:"index.php/site/index/nba/wizards"}]}}}, wc : { text:"Western Conference", divisions: {southwest: { name: "Southwest", teams: [{team:"Dallas Mavericks", url:"index.php/site/index/nba/mavericks"},{team:"Houston Rockets", url:"index.php/site/index/nba/rockets"},{team:"Memphis Grizzlies", url:"index.php/site/index/nba/grizzlies"},{team:"New Orleans Pelicans", url:"index.php/site/index/nba/pelicans"},{team:"San Antonio Spurs", url:"index.php/site/index/nba/spurs"}]},northwest: { name: "Northwest", teams: [{team:"Denver Nuggets", url:"index.php/site/index/nba/nuggets"},{team:"Minnesota Timberwolves", url:"index.php/site/index/nba/timberwolves"},{team:"Oklahoma City Thunder", url:"index.php/site/index/nba/thunder"},{team:"Portland Trail Blazers", url:"index.php/site/index/nba/blazers"},{team:"Utah Jazz", url:"index.php/site/index/nba/jazz"}]},pacific: { name: "Pacific", teams: [{team:"Golden State Warriors", url:"index.php/site/index/nba/warriors"},{team:"Los Angeles Clippers", url:"index.php/site/index/nba/clippers"},{team:"Los Angeles Lakers", url:"index.php/site/index/nba/lakers"},{team:"Phoenix Suns", url:"index.php/site/index/nba/suns"},{team:"Sacramento Kings", url:"index.php/site/index/nba/kings"}]}}} } };
+	var nba = { conferences : { 
+								ec : { text:"Eastern Conference", divisions: {
+									atlantic: { name: "Atlantic", teams: 
+									[
+										{team:"Boston Celtics", url:"index.php/site/index/nba/celtics"},
+										{team:"Brooklyn Nets", url:"index.php/site/index/nba/nets"},
+										{team:"New York Knicks", url:"index.php/site/index/nba/knicks"},
+										{team:"Philadelphia 76ers", url:"index.php/site/index/nba/sixers"},
+										{team:"Toronto Raptors", url:"index.php/site/index/nba/raptors"}]},
+									central: { name: "Central", teams: 
+									[
+										{team:"Chicago Bulls", url:"index.php/site/index/nba/bulls"},
+										{team:"Cleveland Cavaliers", url:"index.php/site/index/nba/cavaliers"},
+										{team:"Detroit Pistons", url:"index.php/site/index/nba/pistons"},
+										{team:"Indiana Pacers", url:"index.php/site/index/nba/pacers"},
+										{team:"Milwaukee Bucks", url:"index.php/site/index/nba/bucks"}]},
+									southeast: { name: "Southeast", teams: 
+									[
+										{team:"Atlanta Hawks", url:"index.php/site/index/nba/hawks"},
+										{team:"Charlotte Hornets", url:"index.php/site/index/nba/hornets"},
+										{team:"Miami Heat", url:"index.php/site/index/nba/heat"},
+										{team:"Orlando Magic", url:"index.php/site/index/nba/magic"},
+										{team:"Washington Wizards", url:"index.php/site/index/nba/wizards"}]}}}, 
+								wc : { text:"Western Conference", divisions: {
+									southwest: { name: "Southwest", teams: 
+									[
+										{team:"Dallas Mavericks", url:"index.php/site/index/nba/mavericks"},
+										{team:"Houston Rockets", url:"index.php/site/index/nba/rockets"},
+										{team:"Memphis Grizzlies", url:"index.php/site/index/nba/grizzlies"},
+										{team:"New Orleans Pelicans", url:"index.php/site/index/nba/pelicans"},
+										{team:"San Antonio Spurs", url:"index.php/site/index/nba/spurs"}]},
+									northwest: { name: "Northwest", teams: 
+									[
+										{team:"Denver Nuggets", url:"index.php/site/index/nba/nuggets"},
+										{team:"Minnesota Timberwolves", url:"index.php/site/index/nba/timberwolves"},
+										{team:"Oklahoma City Thunder", url:"index.php/site/index/nba/thunder"},
+										{team:"Portland Trail Blazers", url:"index.php/site/index/nba/blazers"},
+										{team:"Utah Jazz", url:"index.php/site/index/nba/jazz"}]},
+									pacific: { name: "Pacific", teams: 
+									[
+										{team:"Golden State Warriors", url:"index.php/site/index/nba/warriors"},
+										{team:"Los Angeles Clippers", url:"index.php/site/index/nba/clippers"},
+										{team:"Los Angeles Lakers", url:"index.php/site/index/nba/lakers"},
+										{team:"Phoenix Suns", url:"index.php/site/index/nba/suns"},
+										{team:"Sacramento Kings", url:"index.php/site/index/nba/kings"}
+									]}
+								}} 
+							} };
 	$scope.nba = nba;
 	
-	var nhl = {};
-	
+	var nhl = { conferences : { 
+								wc : { text:"Western Conference", divisions: { 
+									pacific : { name: "pacific", teams: 
+									[
+										{team:"Anaheim Ducks", url:"index.php/site/index/nhl/ducks"},
+										{team:"Arizona Coyotes", url:"index.php/site/index/nhl/coyotes"},
+										{team:"Calgary Flames", url:"index.php/site/index/nhl/flames"},
+										{team:"Edmonton Oilers", url:"index.php/site/index/nhl/oilers"},
+										{team:"Los Angeles Kings", url:"index.php/site/index/nhl/kings"},
+										{team:"San Jose Sharks", url:"index.php/site/index/nhl/sharks"},
+										{team:"Vancouver Canucks", url:"index.php/site/index/nhl/canucks"}
+									]},
+									central : { name: "central", teams: 
+									[
+										{team:"Chicago Blackhawks", url:"index.php/site/index/nhl/blackhawks"},
+										{team:"Colorado Avalanche", url:"index.php/site/index/nhl/avalanche"},
+										{team:"Dallas Stars", url:"index.php/site/index/nhl/stars"},
+										{team:"Minnesota Wild", url:"index.php/site/index/nhl/wild"},
+										{team:"Nashville Predators", url:"index.php/site/index/nhl/predators"},
+										{team:"St. Louis Blues", url:"index.php/site/index/nhl/blues"},
+										{team:"Winnipeg Jets", url:"index.php/site/index/nhl/jets"}
+									]}
+								}}, 
+								ec : { text:"Eastern Conference", divisions: { 
+									atlantic : { name: "atlantic", teams: 
+									[
+										{team:"Boston Bruins", url:"index.php/site/index/nhl/bruins"},
+										{team:"Buffalo Sabres", url:"index.php/site/index/nhl/sabres"},
+										{team:"Detroit Red Wings", url:"index.php/site/index/nhl/red wings"},
+										{team:"Florida Panthers", url:"index.php/site/index/nhl/panthers"},
+										{team:"MontrÃ©al Canadiens", url:"index.php/site/index/nhl/canadiens"},
+										{team:"Ottawa Senators", url:"index.php/site/index/nhl/senators"},
+										{team:"Tampa Bay Lightning", url:"index.php/site/index/nhl/lightning"},
+										{team:"Toronto Maple Leafs", url:"index.php/site/index/nhl/maple leafs"}
+									]},
+									metropolitan : { name: "metropolitan", teams: 
+									[
+										{team:"Carolina Hurricanes", url:"index.php/site/index/nhl/hurricanes"},
+										{team:"Columbus Blue Jackets", url:"index.php/site/index/nhl/blue jackets"},
+										{team:"New Jersey Devils", url:"index.php/site/index/nhl/devils"},
+										{team:"New York Islanders", url:"index.php/site/index/nhl/islanders"},
+										{team:"New York Rangers", url:"index.php/site/index/nhl/rangers"},
+										{team:"Philadelphia Flyers", url:"index.php/site/index/nhl/flyers"},
+										{team:"Pittsburgh Penguins", url:"index.php/site/index/nhl/penguins"},
+										{team:"Washington Capitals", url:"index.php/site/index/nhl/capitals"}
+									]}
+								}} 
+							}};
+	$scope.nhl = nhl;
 	
  });
