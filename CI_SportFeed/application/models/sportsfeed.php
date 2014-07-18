@@ -7,6 +7,7 @@ class Sportsfeed extends CI_Model {
 		$this->load->library('rssparser');
 		$this->load->model('rss_db_model');
 
+
 		$data = $this->rss_db_model->getSportIdByTeamAndSport($team, $sport);
 
 		$sport_id = $data->sport_id;
@@ -14,15 +15,22 @@ class Sportsfeed extends CI_Model {
 		// Form the url
 		if($sport == "mlb")
 		{
-			$url = "http://partner.mlb.com/partnerxml/gen/news/rss/".$team.".xml";
+			$url = "http://partner.mlb.com/partnerxml/gen/news/rss/".$team.".xml";	
 		}
 		if($sport == "nfl")
 		{
 			$url = "http://www.nfl.com/rss/rsslanding?searchString=team&abbr=".$team;
 		}
+		if($sport == "nhl")
+		{
+			$url = "http://".$team.".nhl.com/rss/news.xml";
+		}
+		if($sport == "nba")
+		{
+			$url = "http://www.nba.com/".$team."/rss.xml";
+		}		
 		
 		
-
 
 		$this->rssparser->set_feed_url($url);
 		$this->rssparser->set_cache_life(30);

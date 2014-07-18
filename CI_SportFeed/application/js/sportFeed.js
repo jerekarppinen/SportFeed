@@ -195,17 +195,17 @@
 									[
 										{team:"Boston Bruins", url:"index.php/site/index/nhl/bruins"},
 										{team:"Buffalo Sabres", url:"index.php/site/index/nhl/sabres"},
-										{team:"Detroit Red Wings", url:"index.php/site/index/nhl/red wings"},
+										{team:"Detroit Red Wings", url:"index.php/site/index/nhl/redwings"},
 										{team:"Florida Panthers", url:"index.php/site/index/nhl/panthers"},
-										{team:"MontrÃ©al Canadiens", url:"index.php/site/index/nhl/canadiens"},
+										{team:"Montreal Canadiens", url:"index.php/site/index/nhl/canadiens"},
 										{team:"Ottawa Senators", url:"index.php/site/index/nhl/senators"},
 										{team:"Tampa Bay Lightning", url:"index.php/site/index/nhl/lightning"},
-										{team:"Toronto Maple Leafs", url:"index.php/site/index/nhl/maple leafs"}
+										{team:"Toronto Maple Leafs", url:"index.php/site/index/nhl/mapleleafs"}
 									]},
 									metropolitan : { name: "metropolitan", teams: 
 									[
 										{team:"Carolina Hurricanes", url:"index.php/site/index/nhl/hurricanes"},
-										{team:"Columbus Blue Jackets", url:"index.php/site/index/nhl/blue jackets"},
+										{team:"Columbus Blue Jackets", url:"index.php/site/index/nhl/bluejackets"},
 										{team:"New Jersey Devils", url:"index.php/site/index/nhl/devils"},
 										{team:"New York Islanders", url:"index.php/site/index/nhl/islanders"},
 										{team:"New York Rangers", url:"index.php/site/index/nhl/rangers"},
