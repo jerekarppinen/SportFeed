@@ -23,9 +23,11 @@ ul { list-style-type: none; }
 #navbox {   padding-top:20px; }
 
 .divisions li {white-space:nowrap;}
-#navbox  li a:link, #navbox  li a:visited { text-decoration:none; color:#FFF;}  /*sininen väri #5882FA*/
+#navbox  li a, #navbox  li a:visited { text-decoration:none; color:#FFF;}  /*sininen väri #5882FA*/
 #navbox  li a:hover { color:#315FDF; } 
 #navbox li ul { display:inherit; white-space:nowrap; }
+.navlink {font-weight:bold;}
+.navlink, .navsublink {cursor:pointer;}
 
 .teamscontainer {position:fixed; display:none;background-color: #0D833F; border:1px solid #000;}
 .teamscontainer .conferenceholder {display:inherit;  padding:0;}

@@ -28,6 +28,7 @@ class Site extends CI_Controller {
 		}
 		else
 		{
+			//Sport specific news selected
 			if($team == "")
 			{
 				// Read rss feed for specific sport and commit updates if necessary
@@ -45,8 +46,9 @@ class Site extends CI_Controller {
 				// this row and "data" attribute from below can be removed when client side accepts json encoded data
 				$data["entries"] = $this->rss_db_model->getNewsFromDB($sport_id);
 
-				$this->load->view("home", $data);	
+				$this->load->view("newsContainer", $data);	
 			}
+			//Sport and team specific news selected
 			else
 			{
 				
@@ -58,7 +60,7 @@ class Site extends CI_Controller {
 
 				$data["entries"] = $this->rss_db_model->getTeamNewsFromDB($team_id);
 
-				$this->load->view("home", $data);
+				$this->load->view("newsContainer", $data);
 
 			}
 

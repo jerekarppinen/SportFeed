@@ -32,54 +32,54 @@
 	<h1 id="bannertext"><a href="<?php echo base_url();?>index.php/site/index/">Sports Lounge</a></h1>
 	
 	<ul id="navbox" class="clearfix">
-		<li class="mlb"><a class="navlink" href="<?php echo base_url();?>index.php/site/index/mlb"><strong>MLB</strong></a>
+		<li class="mlb"><a class="navlink" data-url="<?php echo base_url();?>index.php/site/index/mlb" ng-click="getFeed($event)">MLB</a>
 			<div class="teamscontainer">
 				<ul ng-repeat="conference in mlb.conferences" class="conferenceholder">
 					<li class="conferencename"><strong>{{conference.text}}</strong></li>
 					<li class="clearfix">
 						<ul ng-repeat="division in conference.divisions" class="divisions">
 							<strong>{{division.name}}</strong>
-							<li ng-repeat="item in division.teams"><a href="<?php echo base_url();?>{{item.url}}">{{item.team}}</a></li>
+							<li ng-repeat="item in division.teams"><a class="navsublink" data-url="<?php echo base_url();?>{{item.url}}" ng-click="getFeed($event)">{{item.team}}</a></li>
 						</ul>
 					</li>
 				</ul>
 			</div>
 		</li>
-		<li class="nfl"><a class="navlink" href="<?php echo base_url();?>index.php/site/index/nfl"><strong>NFL</strong></a>
+		<li class="nfl"><a class="navlink" data-url="<?php echo base_url();?>index.php/site/index/nfl" ng-click="getFeed($event)">NFL</a>
 			<div class="teamscontainer">
 				<ul ng-repeat="conference in nfl.conferences" class="conferenceholder">
 					<li class="conferencename"><strong>{{conference.text}}</strong></li>
 					<li class="clearfix">
 						<ul ng-repeat="division in conference.divisions" class="divisions">
 							<strong>{{division.name}}</strong>
-							<li ng-repeat="item in division.teams"><a href="<?php echo base_url();?>{{item.url}}">{{item.team}}</a></li>
+							<li ng-repeat="item in division.teams"><a class="navsublink" data-url="<?php echo base_url();?>{{item.url}}" ng-click="getFeed($event)">{{item.team}}</a></li>
 						</ul>
 					</li>
 				</ul>
 			</div>
 		</li>
 
-		<li class="nba"><a class="navlink" href="<?php echo base_url();?>index.php/site/index/nba"><strong>NBA</strong></a>
+		<li class="nba"><a class="navlink" data-url="<?php echo base_url();?>index.php/site/index/nba" ng-click="getFeed($event)">NBA</a>
 			<div class="teamscontainer">
 				<ul ng-repeat="conference in nba.conferences" class="conferenceholder">
 					<li class="conferencename"><strong>{{conference.text}}</strong></li>
 					<li class="clearfix">
 						<ul ng-repeat="division in conference.divisions" class="divisions">
 							<strong>{{division.name}}</strong>
-							<li ng-repeat="item in division.teams"><a href="<?php echo base_url();?>{{item.url}}">{{item.team}}</a></li>
+							<li ng-repeat="item in division.teams"><a class="navsublink" data-url="<?php echo base_url();?>{{item.url}}" ng-click="getFeed($event)">{{item.team}}</a></li>
 						</ul>
 					</li>
 				</ul>
 			</div>
 		</li>
-		<li class="nhl"><a class="navlink" href="<?php echo base_url();?>index.php/site/index/nhl"><strong>NHL</strong></a>
+		<li class="nhl"><a class="navlink" data-url="<?php echo base_url();?>index.php/site/index/nhl" ng-click="getFeed($event)">NHL</a>
 			<div class="teamscontainer">
 				<ul ng-repeat="conference in nhl.conferences" class="conferenceholder">
 					<li class="conferencename"><strong>{{conference.text}}</strong></li>
 					<li class="clearfix">
 						<ul ng-repeat="division in conference.divisions" class="divisions">
 							<strong>{{division.name}}</strong>
-							<li ng-repeat="item in division.teams"><a href="<?php echo base_url();?>{{item.url}}">{{item.team}}</a></li>
+							<li ng-repeat="item in division.teams"><a class="navsublink" data-url="<?php echo base_url();?>{{item.url}}" ng-click="getFeed($event)">{{item.team}}</a></li>
 						</ul>
 					</li>
 				</ul>

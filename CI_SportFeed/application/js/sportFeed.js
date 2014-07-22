@@ -1,6 +1,31 @@
- var SFApp = angular.module('SFApp', ['ngResource']);
- SFApp.controller('AppCtrl', function AppCtrl($scope) {
- 
+ var SFApp = angular.module('SFApp', ['ngResource'])
+
+.service('ajaxService',function($http) {
+
+	this.getNews = function(definedUrl,callback) {
+		$http({method: 'GET', url: definedUrl}).
+	    success(callback). //successilla "palataan" esittelemään data
+	    error(function(data, status, headers, config) {
+	      // called asynchronously if an error occurs
+	      // or server returns response with an error status.
+	      	alert(status);
+	    });	
+	};
+	
+})
+
+.controller('AppCtrl', function AppCtrl($scope,ajaxService) {
+ 	
+	$scope.getFeed = function(e) {
+		var url = e.target.getAttribute("data-url");
+		//Kutsutaan uutisten keruu ajaxia ja onnistuneella yhteydellä näytetään uutiset
+		ajaxService.getNews(url,function(data) {
+			$('#wrapper').html(data);
+		});
+	}
+
+
+	//urheilulajilistaukset
 	var mlb = { conferences : {
 							 	al: { text: 'American League', divisions: {
 									east:{name: 'East', teams:
