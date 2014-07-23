@@ -3,12 +3,12 @@
 							 foreach($entries as $entry) : ?>
 							<div class="item">
 								<p>
-									<b>
-										<a href="<?php echo $entry->link; ?>"><?php echo $entry->title; ?></a>
-									</b>
+									
+										<a class="itemtitle" href="<?php echo $entry->link; ?>"><?php echo $entry->title; ?></a>
+									
 								</p>
-								<p><?php echo $entry->description; ?></p>
-								<p><i><?php echo $entry->pubdate; ?></i></p>
+								<p class="itemdescr"><a href="<?php echo $entry->link; ?>"><?php echo $entry->description; ?></a></p>
+								<p class="itemdate"><i><?php echo $entry->pubdate; ?></i></p>
 							</div>
 <?php endforeach; } ?>
 

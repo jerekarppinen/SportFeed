@@ -17,16 +17,18 @@ ul { list-style-type: none; }
 	padding: 10px 0 0 30px;
 	height:100%;
 }
-#bannertext { font-size: 42px; color:#5882FA;}
+#bannertext { font-size: 42px; color:#5882FA; font-weight: normal;}
 #bannertext a:link, #bannertext a:visited { text-decoration:none; color:#FFF; }  /*sininen väri #5882FA*/
 
-#navbox {   padding-top:20px; }
+#navbox {   padding-top:40px; }
+
+.mlb, .nfl, .nba, .nhl {margin-bottom:5px;}
 
 .divisions li {white-space:nowrap;}
 #navbox  li a, #navbox  li a:visited { text-decoration:none; color:#FFF;}  /*sininen väri #5882FA*/
 #navbox  li a:hover { color:#315FDF; } 
 #navbox li ul { display:inherit; white-space:nowrap; }
-.navlink {font-weight:bold;}
+.navlink {font-size:20pt;}
 .navlink, .navsublink {cursor:pointer;}
 
 .teamscontainer {position:fixed; display:none;background-color: #0D833F; border:1px solid #000;}
@@ -72,17 +74,22 @@ ul { list-style-type: none; }
 #news-container { padding:10px; }
 
 .item {
-  width: 240px;
-  min-height: 120px;
-  float: left;
-  margin:0 10px 10px 0;
-  background: #EFEFFB;
-  border: 2px solid #333;
-  border-color: hsla(0, 0%, 0%, 0.5);
-  border-radius: 5px;
+	max-width:15%;
+	min-height: 120px;
+	float: left;
+	margin:8px 0 0 8px ;
+	background: #FCFDF0; /* #FDFFED;  #E9FFE5;  #B7FDAA; #FCFFDF;  */
+	border: 1px solid #333;
+	border-color: hsla(0, 0%, 0%, 0.5);
 }
 .item p { margin: 1em; }
-.item p:last-child { font-size:10pt;
+.item .itemtitle {font-size:14pt; font-weight:bold;}
+.item .itemdescr { font-size:12pt;}
+.item .itemdate { font-size:8pt; }
+.item a {
+	color:#202020;
+	text-decoration:none;
+}
 
 @media screen and (max-width: 1024px){ 
 	
