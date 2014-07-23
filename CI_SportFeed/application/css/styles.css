@@ -13,11 +13,11 @@ ul { list-style-type: none; }
 	top:0;
 	z-index:2;
 	width:400px;
-	background-color: #27ae60;
+	background-color: #239754;
 	padding: 10px 0 0 30px;
 	height:100%;
 }
-#bannertext {font-family:'Open sans',sans-serif; font-size: 42px; color:#5882FA; font-weight: normal; }
+#bannertext {font-family:'Open sans',sans-serif; font-size: 48px; color:#5882FA; font-weight: normal; }
 #bannertext a:link, #bannertext a:visited { text-decoration:none; color:#FFF; }  /*sininen väri #5882FA*/
 
 #navbox {   padding-top:40px; }
@@ -79,7 +79,7 @@ ul { list-style-type: none; }
 	min-height: 120px;
 	float: left;
 	margin:8px 0 0 8px ;
-	background: #FCFDF0; /* #FDFFED;  #E9FFE5;  #B7FDAA; #FCFFDF;  */
+	background: #F5FFF7; /* #F5FFF7; #E2FFE7; #FDFFED;  #E9FFE5;  #B7FDAA; #FCFFDF; #E5FFAE; #F2ECFF; #E2FFE7; */
 	border: 1px solid #333;
 	border-color: hsla(0, 0%, 0%, 0.5);
 }
