@@ -5,7 +5,7 @@
 	-webkit-box-sizing:border-box;
 	-moz-box-sizing:border-box;
 }
-body {  font-family: 'Muli', sans-serif; }
+body {  font-family: 'Open sans', sans-serif; }
 ul { list-style-type: none; }
 /*header part*/
 #header {
@@ -17,7 +17,7 @@ ul { list-style-type: none; }
 	padding: 10px 0 0 30px;
 	height:100%;
 }
-#bannertext { font-size: 42px; color:#5882FA; font-weight: normal;}
+#bannertext {font-family:'Open sans',sans-serif; font-size: 42px; color:#5882FA; font-weight: normal; }
 #bannertext a:link, #bannertext a:visited { text-decoration:none; color:#FFF; }  /*sininen väri #5882FA*/
 
 #navbox {   padding-top:40px; }
@@ -28,6 +28,7 @@ ul { list-style-type: none; }
 #navbox  li a, #navbox  li a:visited { text-decoration:none; color:#FFF;}  /*sininen väri #5882FA*/
 #navbox  li a:hover { color:#315FDF; } 
 #navbox li ul { display:inherit; white-space:nowrap; }
+#navbox strong {color:#202020;}
 .navlink {font-size:20pt;}
 .navlink, .navsublink {cursor:pointer;}
 

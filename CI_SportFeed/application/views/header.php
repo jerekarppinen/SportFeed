@@ -2,7 +2,7 @@
 <html ng-app="SFApp">
 <head>
 <link rel="stylesheet" href="<?php echo base_url();?>application/css/styles.css"> 
-<link href='http://fonts.googleapis.com/css?family=Muli:300,400' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Muli:300,400|Open+Sans:300' rel='stylesheet' type='text/css'>
 
 <script type="text/javascript" src="<?php echo base_url();?>/application/libraries/jquery.203.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>/application/libraries/masonry.js"></script>
