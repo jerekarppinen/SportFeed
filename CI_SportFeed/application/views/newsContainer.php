@@ -1,4 +1,3 @@
-<div id="news-container" class="js-masonry clearfix">
 
 <?php if(isset($entries)) {
 							 foreach($entries as $entry) : ?>
@@ -13,4 +12,3 @@
 							</div>
 <?php endforeach; } ?>
 
-</div>

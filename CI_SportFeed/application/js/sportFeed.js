@@ -20,12 +20,16 @@
 		var url = e.target.getAttribute("data-url");
 		//Kutsutaan uutisten keruu ajaxia ja onnistuneella yhteydellä näytetään uutiset
 		ajaxService.getNews(url,function(data) {
-			$('#wrapper').html(data);
+			//wrap up the string of HTML in a jQuery object for masonry to understand it 
+			var items = $(data);
+			
+			$('#wrapper').html(items).masonry( 'prepended', items );
+			
 		});
 	}
 
 
-	//urheilulajilistaukset
+	//Sport teams
 	var mlb = { conferences : {
 							 	al: { text: 'American League', divisions: {
 									east:{name: 'East', teams:

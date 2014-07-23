@@ -15,8 +15,7 @@
 <title>Sportster!</title>
 <script type="text/javascript">
 	$(document).ready(function() { 
-		var contti = $('#news-container');
-		contti.masonry({
+		$('#wrapper').masonry({
 		  // options
 		  columnWidth: 200,
 		  itemSelector: '.item'
@@ -104,4 +103,4 @@
 	</form>
 
 </div>
-<div id="wrapper" class="clearfix">
+<div id="wrapper" class="js-masonry clearfix">
