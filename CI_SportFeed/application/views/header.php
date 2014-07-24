@@ -32,6 +32,8 @@
 			$('#registerbox').dialog({
 				modal: true,
 				resizable: false,
+				show: { effect: 'clip', duration:300},
+				hide: { effect: 'clip', duration:300},
 				open: function() {
 					$('.ui-widget-overlay').on('click',function(e) {
 						$('#registerbox').dialog('close');
