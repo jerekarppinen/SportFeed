@@ -18,7 +18,7 @@
 		
 		<?php
 		$base_url = base_url();
-		echo form_open($base_url . 'user/register');
+		echo form_open($base_url . 'index.php/user/register');
 		
 		$username = array(
 			'name' => 'username',

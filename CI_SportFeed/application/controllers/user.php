@@ -23,7 +23,7 @@ class User extends CI_Controller {
 		}
 		else {
 			// everything is good - process the form
-			
+
 			$username = $this->input->post('username');
 			$password = $this->input->post('password');
 			$email = $this->input->post('email');
@@ -38,7 +38,10 @@ class User extends CI_Controller {
 			$this->email->subject('Registration Confirmation');
 			$this->email->message('Please click this link to confirm your registration ' .  anchor('http://localhost/CI_SportFeed/index.php/user/register_confirm/' . $activation_code, 'Confirm Registration'));
 			
-			echo 'Please click this link to confirm your registration ' .  anchor('http://localhost/CI_SportFeed/index.php/user/register_confirm/' . $activation_code, 'Confirm Registration');
+			$base_url = base_url();
+
+			//echo 'Please click this link to confirm your registration ' .  anchor($base_url."/index.php/user/register_confirm/' . $activation_code, 'Confirm Registration');
+			echo "Please click this link to confirm your registration <a href='$base_url/index.php/user/register_confirm/$activation_code'>Confirm Registration</a>";
 			//$this->email->send();
 			
 		}	
@@ -47,9 +50,9 @@ class User extends CI_Controller {
 		
 	}
 
-	function register_confirm()
+	function register_confirm($registration_code)
 	{
-		$registration_code = $this->uri->segment(3);
+		//$registration_code = $this->uri->segment(3);
 		
 		if($registration_code == '')
 		{
@@ -58,18 +61,15 @@ class User extends CI_Controller {
 		}
 		else 
 			{
-				$query = "SELECT user_id FROM users WHERE activation_code = ?";
-				$result = $this->db->query($query, $registration_code);
-				
-				if($result->num_rows() == 1)
+				$this->load->model("user_model");
+				$result = $this->user_model->findUserByActivationcode($registration_code);
+
+				if($result == 1)
 				{
-					$query = "UPDATE users SET activated = 1 WHERE activation_code = ?";
-					$this->db->query($query, $registration_code);
-					
 					echo "You have succesfully registered!";
 				}
-				else {
-					
+				elseif($result == 0)
+				{
 					echo "You have failed to register - no record found for that activation code.";
 				}
 			}
@@ -88,6 +88,11 @@ class User extends CI_Controller {
 		}
 		
 		return $activatecode;
+	}
+
+	public function login()
+	{
+		
 	}
 	
 }
