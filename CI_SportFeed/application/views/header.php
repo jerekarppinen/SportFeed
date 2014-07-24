@@ -1,16 +1,21 @@
 <!DOCTYPE HTML>
 <html ng-app="SFApp">
 <head>
-<link rel="stylesheet" href="<?php echo base_url();?>application/css/styles.css"> 
 <link href='http://fonts.googleapis.com/css?family=Muli:300,400|Open+Sans:300' rel='stylesheet' type='text/css'>
 
 <script type="text/javascript" src="<?php echo base_url();?>/application/libraries/jquery.203.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>/application/libraries/jquery-ui-1.11.0.custom/jquery-ui.min.js"></script>
+
+<link rel="stylesheet" href="<?php echo base_url();?>application/libraries/jquery-ui-1.11.0.custom/jquery-ui.min.css"> 
+
 <script type="text/javascript" src="<?php echo base_url();?>/application/libraries/masonry.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>/application/libraries/angular.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>/application/libraries/angular-resource.js"></script>
 
 <script type="text/javascript" src="<?php echo base_url();?>/application/js/sportFeed.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>/application/js/effects.js"></script>
+
+<link rel="stylesheet" href="<?php echo base_url();?>application/css/styles.css">
 
 <title>Sportster!</title>
 <script type="text/javascript">
@@ -20,6 +25,21 @@
 		  columnWidth: 200,
 		  itemSelector: '.item'
 		});
+
+		$('.registerlink').on('click',function(e) {
+			e.preventDefault();
+
+			$('#registerbox').dialog({
+				modal: true,
+				resizable: false,
+				open: function() {
+					$('.ui-widget-overlay').on('click',function(e) {
+						$('#registerbox').dialog('close');
+					})
+				}
+			});
+		});
+		
 	});
 </script>
 
@@ -95,12 +115,16 @@
 	</ul>-->
 
 
-	<form id="loginControl" method="post"><input type="text"/><br/><input type="password"/>
+	<form id="loginControl" method="post">
+		<input type="text"/>
+		<br/>
+		<input type="password"/>
 		<br/>
 		<input type="submit" name="log" value="Log in"/>
 		<br/>
-		<a href="<?php echo base_url();?>index.php/user">Register</a>
+		<a class="registerlink">Register</a>
 	</form>
 
 </div>
+<?php include("view_register.php"); ?>
 <div id="wrapper" class="js-masonry clearfix">

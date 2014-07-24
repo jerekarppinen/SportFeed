@@ -7,6 +7,30 @@
 }
 body {  font-family: 'Open sans', sans-serif; }
 ul { list-style-type: none; }
+
+/* view_register.php */
+#registerbox {
+	margin-right: auto;
+	margin-left: auto;
+	width:400px;
+	background-color: #239754;
+	
+	height:100%;
+	color:#FFF;
+	display:none;
+}
+.ui-dialog {padding:0.1em;}
+.ui-widget-overlay {background:none !important;background-color: #202020 !important;}
+.ui-dialog-titlebar { display:none; }
+.ui-widget, .ui-widget input {font-family:'Open sans', sans-serif !important; }
+.ui-widget input {font-weight:bold;}
+.ui-dialog .ui-dialog-content {padding:30px 30px;}
+.ui-corner-all {border-radius: 0;}
+
+.registerform {margin-top:20px;}
+.registerform input {width:100%;}
+.regsubmit {margin-top:20px; padding:10px 0; background: #F5FFF7; cursor:pointer;}
+ 
 /*header part*/
 #header {
 	position:fixed;
@@ -20,18 +44,17 @@ ul { list-style-type: none; }
 #bannertext {font-family:'Open sans',sans-serif; font-size: 48px; color:#5882FA; font-weight: normal; }
 #bannertext a:link, #bannertext a:visited { text-decoration:none; color:#FFF; }  /*sininen väri #5882FA*/
 
-#navbox {   padding-top:40px; }
+#navbox { padding-top:40px; }
 
 .mlb, .nfl, .nba, .nhl {margin-bottom:5px;}
 
 .divisions li {white-space:nowrap;}
 #navbox  li a, #navbox  li a:visited { text-decoration:none; color:#FFF;}  /*sininen väri #5882FA*/
-#navbox  li a:hover { color:#315FDF; } 
+#navbox  li a:hover { color:#202020; } 
 #navbox li ul { display:inherit; white-space:nowrap; }
 #navbox strong {color:#202020;}
 .navlink {font-size:20pt;}
 .navlink, .navsublink {cursor:pointer;}
-
 .teamscontainer {position:fixed; display:none;background-color: #0D833F; border:1px solid #000;}
 .teamscontainer .conferenceholder {display:inherit;  padding:0;}
 
@@ -46,7 +69,9 @@ ul { list-style-type: none; }
 
 
 #loginControl  { margin-top:3em; }
-
+#loginControl .registerlink {text-decoration: none; color:#FFF; cursor:pointer;}
+#loginControl .registerlink:hover { color:#202020; } 
+#loginControl input {margin-bottom: 5px;}
 
 /* content part */
 #wrapper {  padding-left:400px;}
