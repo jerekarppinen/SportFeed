@@ -117,7 +117,7 @@
 	</ul>-->
 
 
-	<form id="loginControl" method="post">
+	<form id="loginControl" method="post" action="<?php echo base_url;?>index.php/user/login">
 		<input type="text"/>
 		<br/>
 		<input type="password"/>
