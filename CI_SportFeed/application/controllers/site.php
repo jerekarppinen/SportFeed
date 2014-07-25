@@ -46,7 +46,7 @@ class Site extends CI_Controller {
 				// this row and "data" attribute from below can be removed when client side accepts json encoded data
 				$data["entries"] = $this->rss_db_model->getNewsFromDB($sport_id);
 
-				$this->load->view("newsContainer", $data);	
+				$this->load->view("news_container", $data);	
 			}
 			//Sport and team specific news selected
 			else
@@ -60,7 +60,7 @@ class Site extends CI_Controller {
 
 				$data["entries"] = $this->rss_db_model->getTeamNewsFromDB($team_id);
 
-				$this->load->view("newsContainer", $data);
+				$this->load->view("news_container", $data);
 
 			}
 

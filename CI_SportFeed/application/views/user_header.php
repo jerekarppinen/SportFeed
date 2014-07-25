@@ -117,15 +117,9 @@
 	</ul>-->
 
 
-	<form id="loginControl" method="post" action="<?php echo base_url();?>index.php/user/login">
-		<input type="text"/>
-		<br/>
-		<input type="password"/>
-		<br/>
-		<input type="submit" name="log" value="Log in"/>
-		<br/>
-		<a class="registerlink">Register</a>
-	</form>
+	<div id="userbox">
+		<h3>Welcome user</h3>
+	</div>
 
 </div>
 <?php include("view_register.php"); ?>
