@@ -48,30 +48,44 @@ ul { list-style-type: none; }
 
 .mlb, .nfl, .nba, .nhl {margin-bottom:5px;}
 
-.divisions li {white-space:nowrap;}
 #navbox  li a, #navbox  li a:visited { text-decoration:none; color:#FFF;}  /*sininen väri #5882FA*/
 #navbox  li a:hover { color:#202020; } 
 #navbox li ul { display:inherit; white-space:nowrap; }
-#navbox strong {color:#202020;}
+
 .navlink {font-size:20pt;}
 .navlink, .navsublink {cursor:pointer;}
-.teamscontainer {position:fixed; display:none;background-color: #0D833F; border:1px solid #000;}
-.teamscontainer .conferenceholder {display:inherit;  padding:0;}
+.teamscontainer { 
+	position:fixed; 
+	display:none;
+	background-color: #0D833F; 
+	border:1px solid #000;
+	padding:0.3em 0.4em;
+	
+}
 
-#navbox .conferencename {text-align: center;}
-#navbox .conferenceholder li a{  white-space:nowrap; }
-#navbox .divisions { position:static;
+.conferenceholder {display:inherit;  padding:0; overflow:hidden;}
+.conferenceholder:last-child {margin-top:0.3em;}
+
+.conferencename {text-align: center; font-size: 14pt; color:#222423;}
+.divisionname { text-align: center; border-bottom: thin solid #F5FFF7; color:#232524; /*#2E312F; /* #F5FFF7; */}
+.conferenceholder li a{  white-space:nowrap; }
+.conferenceholder li {display:block; }
+.divisions { position:static;
 			 padding:0; float:left; }
+.teamname { padding:0 0.3em; }
+.navsublink { display:block;}
 
-#navbox .mlb .divisions { min-width:33%; }
-#navbox .nfl .divisions { width:25%; }
-#navbox .nba .divisions { min-width:33%; }
+#navbox .mlb .divisions {  }
+#navbox .nfl .divisions { }
+#navbox .nba .divisions {  }
 
 
-#loginControl  { margin-top:3em; }
+#loginControl, #userbox  { margin-top:3em; }
 #loginControl .registerlink {text-decoration: none; color:#FFF; cursor:pointer;}
 #loginControl .registerlink:hover { color:#202020; } 
 #loginControl input {margin-bottom: 5px;}
+
+#userbox h3 {color:#FFF;}
 
 /* content part */
 #wrapper {  padding-left:400px;}

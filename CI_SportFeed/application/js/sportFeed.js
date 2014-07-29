@@ -51,7 +51,7 @@
 									west:{name: 'West', teams:
 									[
 									{team:'Houston Astros', url:'index.php/site/index/mlb/hou'},
-									{team:'Los Angeles Angels of Anaheim', url:'index.php/site/index/mlb/ana'},
+									{team:'Los Angeles Angels', url:'index.php/site/index/mlb/ana'},
 									{team:'Oakland Athletics', url:'index.php/site/index/mlb/oak'},
 									{team:'Seattle Mariners', url:'index.php/site/index/mlb/sea'},
 									{team:'Texas Rangers', url:'index.php/site/index/mlb/tex'}]}}},
@@ -198,7 +198,7 @@
 	
 	var nhl = { conferences : { 
 								wc : { text:"Western Conference", divisions: { 
-									pacific : { name: "pacific", teams: 
+									pacific : { name: "Pacific", teams: 
 									[
 										{team:"Anaheim Ducks", url:"index.php/site/index/nhl/ducks"},
 										{team:"Arizona Coyotes", url:"index.php/site/index/nhl/coyotes"},
@@ -208,7 +208,7 @@
 										{team:"San Jose Sharks", url:"index.php/site/index/nhl/sharks"},
 										{team:"Vancouver Canucks", url:"index.php/site/index/nhl/canucks"}
 									]},
-									central : { name: "central", teams: 
+									central : { name: "Central", teams: 
 									[
 										{team:"Chicago Blackhawks", url:"index.php/site/index/nhl/blackhawks"},
 										{team:"Colorado Avalanche", url:"index.php/site/index/nhl/avalanche"},
@@ -220,7 +220,7 @@
 									]}
 								}}, 
 								ec : { text:"Eastern Conference", divisions: { 
-									atlantic : { name: "atlantic", teams: 
+									atlantic : { name: "Atlantic", teams: 
 									[
 										{team:"Boston Bruins", url:"index.php/site/index/nhl/bruins"},
 										{team:"Buffalo Sabres", url:"index.php/site/index/nhl/sabres"},
@@ -231,7 +231,7 @@
 										{team:"Tampa Bay Lightning", url:"index.php/site/index/nhl/lightning"},
 										{team:"Toronto Maple Leafs", url:"index.php/site/index/nhl/mapleleafs"}
 									]},
-									metropolitan : { name: "metropolitan", teams: 
+									metropolitan : { name: "Metropolitan", teams: 
 									[
 										{team:"Carolina Hurricanes", url:"index.php/site/index/nhl/hurricanes"},
 										{team:"Columbus Blue Jackets", url:"index.php/site/index/nhl/bluejackets"},

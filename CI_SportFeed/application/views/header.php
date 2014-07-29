@@ -59,8 +59,8 @@
 					<li class="conferencename"><strong>{{conference.text}}</strong></li>
 					<li class="clearfix">
 						<ul ng-repeat="division in conference.divisions" class="divisions">
-							<strong>{{division.name}}</strong>
-							<li ng-repeat="item in division.teams"><a class="navsublink" data-url="<?php echo base_url();?>{{item.url}}" ng-click="getFeed($event)">{{item.team}}</a></li>
+							<li class="divisionname"><strong>{{division.name}}</strong></li>
+							<li ng-repeat="item in division.teams" class="teamname"><a class="navsublink" data-url="<?php echo base_url();?>{{item.url}}" ng-click="getFeed($event)">{{item.team}}</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -72,8 +72,8 @@
 					<li class="conferencename"><strong>{{conference.text}}</strong></li>
 					<li class="clearfix">
 						<ul ng-repeat="division in conference.divisions" class="divisions">
-							<strong>{{division.name}}</strong>
-							<li ng-repeat="item in division.teams"><a class="navsublink" data-url="<?php echo base_url();?>{{item.url}}" ng-click="getFeed($event)">{{item.team}}</a></li>
+							<li class="divisionname"><strong>{{division.name}}</strong></li>
+							<li ng-repeat="item in division.teams" class="teamname"><a class="navsublink" data-url="<?php echo base_url();?>{{item.url}}" ng-click="getFeed($event)">{{item.team}}</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -86,8 +86,8 @@
 					<li class="conferencename"><strong>{{conference.text}}</strong></li>
 					<li class="clearfix">
 						<ul ng-repeat="division in conference.divisions" class="divisions">
-							<strong>{{division.name}}</strong>
-							<li ng-repeat="item in division.teams"><a class="navsublink" data-url="<?php echo base_url();?>{{item.url}}" ng-click="getFeed($event)">{{item.team}}</a></li>
+							<li class="divisionname"><strong>{{division.name}}</strong></li>
+							<li ng-repeat="item in division.teams" class="teamname"><a class="navsublink" data-url="<?php echo base_url();?>{{item.url}}" ng-click="getFeed($event)">{{item.team}}</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -99,8 +99,8 @@
 					<li class="conferencename"><strong>{{conference.text}}</strong></li>
 					<li class="clearfix">
 						<ul ng-repeat="division in conference.divisions" class="divisions">
-							<strong>{{division.name}}</strong>
-							<li ng-repeat="item in division.teams"><a class="navsublink" data-url="<?php echo base_url();?>{{item.url}}" ng-click="getFeed($event)">{{item.team}}</a></li>
+							<li class="divisionname"><strong>{{division.name}}</strong></li>
+							<li ng-repeat="item in division.teams" class="teamname"><a class="navsublink" data-url="<?php echo base_url();?>{{item.url}}" ng-click="getFeed($event)">{{item.team}}</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -118,9 +118,9 @@
 
 
 	<form id="loginControl" method="post" action="<?php echo base_url();?>index.php/user/login">
-		<input type="text"/>
+		<input name="username" id="username" type="text"/>
 		<br/>
-		<input type="password"/>
+		<input name="password" id="password" type="password"/>
 		<br/>
 		<input type="submit" name="log" value="Log in"/>
 		<br/>
