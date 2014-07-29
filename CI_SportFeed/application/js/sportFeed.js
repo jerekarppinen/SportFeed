@@ -15,7 +15,11 @@
 	
 	//Kirjautuminen
 	this.login = function(obj,definedUrl,callback) {
-		$http({method: 'POST', url: definedUrl, data: obj}).
+		$http({
+			method: 'POST', 
+			url: definedUrl, 
+			ContentType : 'application/json',
+            data        : {'data': obj}}).
 	    success(callback). //successilla "palataan" esittelemään data
 	    error(function(data, status, headers, config) {
 	      // called asynchronously if an error occurs
