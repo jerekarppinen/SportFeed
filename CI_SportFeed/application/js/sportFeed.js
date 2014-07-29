@@ -2,6 +2,7 @@
 
 .service('ajaxService',function($http) {
 
+	//Uutisten haku
 	this.getNews = function(definedUrl,callback) {
 		$http({method: 'GET', url: definedUrl}).
 	    success(callback). //successilla "palataan" esittelemään data
@@ -12,6 +13,16 @@
 	    });	
 	};
 	
+	//Kirjautuminen
+	this.login = function(obj,definedUrl,callback) {
+		$http({method: 'POST', url: definedUrl, data: obj}).
+	    success(callback). //successilla "palataan" esittelemään data
+	    error(function(data, status, headers, config) {
+	      // called asynchronously if an error occurs
+	      // or server returns response with an error status.
+	      	alert(status);
+	    });	
+	};
 })
 
 .controller('AppCtrl', function AppCtrl($scope,ajaxService) {
@@ -28,7 +39,21 @@
 		});
 	}
 
-
+	$scope.login = {};
+	//kirjautumiskäsittely
+	$scope.login.submitForm = function(e) {
+		var dataObject = {
+				          username : $scope.login.username,
+				          password  : $scope.login.password
+				        };
+		var url=e.target.getAttribute("data-url");
+       	ajaxService.login(dataObject,url,function(data) {
+       		//backendi lähettää urlin jonne ohjataan!
+			console.log("login lähetys onnistuii");
+			//window.location=data.url;
+			
+		});
+	}
 	//Sport teams
 	var mlb = { conferences : {
 							 	al: { text: 'American League', divisions: {

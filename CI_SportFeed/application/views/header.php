@@ -117,10 +117,10 @@
 	</ul>-->
 
 
-	<form id="loginControl" method="post" action="<?php echo base_url();?>index.php/user/login">
-		<input name="username" id="username" type="text"/>
+	<form id="loginControl" ng-submit="login.submitForm($event)" data-url="<?php echo base_url();?>index.php/user/login">
+		<input name="username" ng-model="login.username" type="text"/>
 		<br/>
-		<input name="password" id="password" type="password"/>
+		<input name="password" ng-model="login.password" type="password"/>
 		<br/>
 		<input type="submit" name="log" value="Log in"/>
 		<br/>
