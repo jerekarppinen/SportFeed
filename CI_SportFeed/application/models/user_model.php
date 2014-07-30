@@ -27,4 +27,20 @@ class User_model extends CI_Model {
 			return 0;
 		}
 	}
+
+	public function login($username, $password)
+	{
+		$sha1_password = sha1($password);
+
+		$q = $this->db->query("SELECT user_id FROM users WHERE username = '".$username."' AND password = '".$sha1_password."' AND activated = 1;");
+
+		if($q->num_rows() == 1)
+		{
+			return $q->row()->user_id;
+		}
+		else
+		{
+			return 0;
+		}
+	}
 }

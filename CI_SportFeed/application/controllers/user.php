@@ -92,7 +92,19 @@ class User extends CI_Controller {
 
 	public function login()
 	{
-		
+		// Catch JSON data from Angular
+		$object =  json_decode(file_get_contents("php://input"));
+
+		// Separate username
+		$username = $object->data->username;
+
+		// Separate password
+		$password = $object->data->password;
+
+		$this->load->model("user_model");
+
+		// Echoes 0 if not found, and user_id if user found
+		echo $this->user_model->login($username, $password);
 	}
 	
 }
