@@ -57,7 +57,7 @@
 			<div class="teamscontainer">
 				<ul ng-repeat="conference in mlb.conferences" class="conferenceholder">
 					<li class="conferencename"><strong>{{conference.text}}</strong></li>
-					<li class="clearfix">
+					<li class="divisionsholder clearfix">
 						<ul ng-repeat="division in conference.divisions" class="divisions">
 							<li class="divisionname"><strong>{{division.name}}</strong></li>
 							<li ng-repeat="item in division.teams" class="teamname"><a class="navsublink" data-url="<?php echo base_url();?>{{item.url}}" ng-click="getFeed($event)">{{item.team}}</a></li>
@@ -70,7 +70,7 @@
 			<div class="teamscontainer">
 				<ul ng-repeat="conference in nfl.conferences" class="conferenceholder">
 					<li class="conferencename"><strong>{{conference.text}}</strong></li>
-					<li class="clearfix">
+					<li class="divisionsholder clearfix">
 						<ul ng-repeat="division in conference.divisions" class="divisions">
 							<li class="divisionname"><strong>{{division.name}}</strong></li>
 							<li ng-repeat="item in division.teams" class="teamname"><a class="navsublink" data-url="<?php echo base_url();?>{{item.url}}" ng-click="getFeed($event)">{{item.team}}</a></li>
@@ -84,7 +84,7 @@
 			<div class="teamscontainer">
 				<ul ng-repeat="conference in nba.conferences" class="conferenceholder">
 					<li class="conferencename"><strong>{{conference.text}}</strong></li>
-					<li class="clearfix">
+					<li class="divisionsholder clearfix">
 						<ul ng-repeat="division in conference.divisions" class="divisions">
 							<li class="divisionname"><strong>{{division.name}}</strong></li>
 							<li ng-repeat="item in division.teams" class="teamname"><a class="navsublink" data-url="<?php echo base_url();?>{{item.url}}" ng-click="getFeed($event)">{{item.team}}</a></li>
@@ -97,7 +97,7 @@
 			<div class="teamscontainer">
 				<ul ng-repeat="conference in nhl.conferences" class="conferenceholder">
 					<li class="conferencename"><strong>{{conference.text}}</strong></li>
-					<li class="clearfix">
+					<li class="divisionsholder clearfix">
 						<ul ng-repeat="division in conference.divisions" class="divisions">
 							<li class="divisionname"><strong>{{division.name}}</strong></li>
 							<li ng-repeat="item in division.teams" class="teamname"><a class="navsublink" data-url="<?php echo base_url();?>{{item.url}}" ng-click="getFeed($event)">{{item.team}}</a></li>
@@ -117,7 +117,7 @@
 	</ul>-->
 
 
-	<form id="loginControl" ng-submit="login.submitForm($event)" data-url="<?php echo base_url();?>index.php/user/login">
+	<form id="loginControl" ng-submit="login.submitForm($event)">
 		<input name="username" ng-model="login.username" type="text"/>
 		<br/>
 		<input name="password" ng-model="login.password" type="password"/>

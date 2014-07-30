@@ -27,10 +27,14 @@
 	      	alert(status);
 	    });	
 	};
-})
+}) //service
 
 .controller('AppCtrl', function AppCtrl($scope,ajaxService) {
  	
+ 	//poimitaan base urli
+	var urlarr = $('#bannertext').children('a').attr('href').split('/site/index/'),
+		baseurl = urlarr[0];
+
 	$scope.getFeed = function(e) {
 		var url = e.target.getAttribute("data-url");
 		//Kutsutaan uutisten keruu ajaxia ja onnistuneella yhteydellä näytetään uutiset
@@ -50,7 +54,9 @@
 				          username : $scope.login.username,
 				          password  : $scope.login.password
 				        };
-		var url=e.target.getAttribute("data-url");
+
+		var url = baseurl+'/user/login';
+
        	ajaxService.login(dataObject,url,function(data) {
        		//backendi lähettää urlin jonne ohjataan!
 			console.log("login lähetys onnistuii");
