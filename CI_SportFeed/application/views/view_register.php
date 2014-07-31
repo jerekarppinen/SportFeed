@@ -61,5 +61,6 @@
 				<?php echo form_submit(array('name' => 'register','class' => 'regsubmit'), 'Register') ?>
 		</li>
 	</ul>
+	<?php echo form_close(); ?>
 </div>
-<?php echo form_close(); ?>
+
