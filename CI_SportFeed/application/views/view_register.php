@@ -4,7 +4,7 @@
 	<?php
 	$attributes = array('class' => 'registerform');
 	$base_url = base_url();
-	echo form_open($base_url . 'index.php/user/register', $attributes);		
+	echo form_open($base_url . 'index.php/register/', $attributes);		
 
 	$username = array(
 		'name' => 'username',
