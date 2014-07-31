@@ -32,6 +32,7 @@
 			$('#registerbox').dialog({
 				modal: true,
 				resizable: false,
+				draggable: false,
 				show: { effect: 'clip', duration:300},
 				hide: { effect: 'clip', duration:300},
 				open: function() {

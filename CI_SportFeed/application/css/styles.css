@@ -7,6 +7,7 @@
 }
 body {  font-family: 'Open sans', sans-serif; }
 ul { list-style-type: none; }
+.clearfix:after { display: block; height: 0;  clear: both; }
 
 /* view_register.php */
 #registerbox {
@@ -21,7 +22,8 @@ ul { list-style-type: none; }
 }
 .ui-dialog {padding:0.1em;}
 .ui-widget-overlay {background:none !important;background-color: #202020 !important;}
-.ui-dialog-titlebar { display:none; }
+.ui-dialog-titlebar { padding:0 !important; }
+.ui-widget-header { border:none; background:#239754; }
 .ui-widget, .ui-widget input {font-family:'Open sans', sans-serif !important; }
 .ui-widget input {font-weight:bold;}
 .ui-dialog .ui-dialog-content {padding:30px 30px;}
@@ -56,17 +58,20 @@ ul { list-style-type: none; }
 .teamscontainer { 
 	position:fixed; 
 	display:none;
-	background-color: #2FB466; /* 2FB466 2BB364 32BD6C 20C566 15BB5C 15C45F  */
+	background-color: #30C26D; /* 30C26D 31C26D 34D577 2FB466 2BB364 32BD6C 20C566 15BB5C 15C45F  */
 	border:1px solid #000;
-	padding:0.3em 0.4em;
+	/*padding:0.3em 0.4em;*/
 	
 }
 
-.conferenceholder {display:inherit;  padding:0; overflow:hidden;}
-.conferenceholder:last-child {margin-top:0.3em;}
+.conferenceholder {display:inherit;  padding-bottom:0.3em; overflow:hidden;}
+.conferenceholder:last-child { border-top:thin solid #0E7C24;}
 
 .conferencename {text-align: center; font-size: 14pt; color:#222423;}
-.divisionname { text-align: center; border-bottom: thin solid #F5FFF7; color:#232524; /*#2E312F; /* #F5FFF7; */}
+.divisionname { text-align: center; border-bottom: thin solid #0E7C24; /* F5FFF7 */ color:#232524; /*#2E312F; /* #F5FFF7; */}
+
+.conferencename, .divisionname {background-color:#2FB466;} /* #34D577 */
+
 .conferenceholder li a{  white-space:nowrap; }
 
 .divisionsholder { white-space: nowrap; display:table; width:100%;}
@@ -74,7 +79,7 @@ ul { list-style-type: none; }
 			 padding:0; 
 			 display:table-cell; }
 
-.teamname { padding:0 0.3em; }
+.teamname { padding:0 0.4em; }
 .navsublink { display:block; color:#222423;}
 .navsublink:hover { color:#FFF; }
 
@@ -92,9 +97,6 @@ ul { list-style-type: none; }
 
 /* content part */
 #wrapper {  padding-left:400px;}
-
-.clearfix:after {content: "."; display: block; height: 0;  clear: both; }
-
 
 #filter-container { 
 	text-align:center; 
