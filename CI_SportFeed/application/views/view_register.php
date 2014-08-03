@@ -62,5 +62,4 @@
 		</li>
 	</ul>
 	<?php echo form_close(); ?>
-
 </div>
