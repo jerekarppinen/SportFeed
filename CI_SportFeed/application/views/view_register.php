@@ -2,7 +2,7 @@
 	<h2>User Registration</h2>
 		
 	<?php
-	$attributes = array('class' => 'registerform');
+	$attributes = array('class' => 'registerform', 'ng-submit' => 'register.submitForm($event)');
 	$base_url = base_url();
 	echo form_open($base_url . 'index.php/user/register', $attributes);		
 
@@ -61,5 +61,5 @@
 				<?php echo form_submit(array('name' => 'register','class' => 'regsubmit'), 'Register') ?>
 		</li>
 	</ul>
+	<?php echo form_close(); ?>
 </div>
-<?php echo form_close(); ?>

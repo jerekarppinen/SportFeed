@@ -80,7 +80,7 @@ ul { list-style-type: none; }
 			 display:table-cell; }
 
 .teamname { padding:0 0.4em; }
-.navsublink { display:block; color:#222423;}
+.navsublink { display:block; color:#222423; /* #EFF7F3 */}
 .navsublink:hover { color:#FFF; }
 
 #navbox .mlb .divisions {  }

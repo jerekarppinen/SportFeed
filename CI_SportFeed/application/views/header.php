@@ -14,6 +14,7 @@
 
 <script type="text/javascript" src="<?php echo base_url();?>/application/js/sportFeed.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>/application/js/effects.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>/application/js/register.js"></script>
 
 <link rel="stylesheet" href="<?php echo base_url();?>application/css/styles.css">
 
@@ -25,24 +26,6 @@
 		  columnWidth: 200,
 		  itemSelector: '.item'
 		});
-
-		$('.registerlink').on('click',function(e) {
-			e.preventDefault();
-
-			$('#registerbox').dialog({
-				modal: true,
-				resizable: false,
-				draggable: false,
-				show: { effect: 'clip', duration:300},
-				hide: { effect: 'clip', duration:300},
-				open: function() {
-					$('.ui-widget-overlay').on('click',function(e) {
-						$('#registerbox').dialog('close');
-					})
-				}
-			});
-		});
-		
 	});
 </script>
 

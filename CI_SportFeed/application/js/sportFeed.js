@@ -12,15 +12,27 @@
 	      	alert(status);
 	    });	
 	};
-	
+	//Rekisteröityminen
+	this.register = function(obj,definedUrl) {
+		$http({
+			method: 'POST', 
+			url: definedUrl, 
+			ContentType : 'application/json',
+            data        : obj}).
+	    error(function(data, status, headers, config) {
+	      // called asynchronously if an error occurs
+	      // or server returns response with an error status.
+	      	alert(status);
+	    });	
+	};
+
 	//Kirjautuminen
-	this.login = function(obj,definedUrl,callback) {
+	this.login = function(obj,definedUrl) {
 		$http({
 			method: 'POST', 
 			url: definedUrl, 
 			ContentType : 'application/json',
             data        : {'data': obj}}).
-	    success(callback). //successilla "palataan" esittelemään data
 	    error(function(data, status, headers, config) {
 	      // called asynchronously if an error occurs
 	      // or server returns response with an error status.
@@ -46,9 +58,20 @@
 			
 		});
 	}
+	
+	//rekisteröitymiskäsittely
+	$scope.register= {};
+	$scope.register.submitForm = function(e) {
+		e.preventDefault();
+		var data = $("form.registerform").serialize();
+		var url = baseurl+'/user/register';
 
-	$scope.login = {};
+       ajaxService.register(data,url);
+	}
+
+	
 	//kirjautumiskäsittely
+	$scope.login = {};
 	$scope.login.submitForm = function(e) {
 		var dataObject = {
 				          username : $scope.login.username,
@@ -57,13 +80,9 @@
 
 		var url = baseurl+'/user/login';
 
-       	ajaxService.login(dataObject,url,function(data) {
-       		//backendi lähettää urlin jonne ohjataan!
-			console.log("login lähetys onnistuii");
-			//window.location=data.url;
-			
-		});
+       	ajaxService.login(dataObject,url);
 	}
+
 	//Sport teams
 	var mlb = { conferences : {
 							 	al: { text: 'American League', divisions: {

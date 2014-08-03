@@ -18,8 +18,8 @@ class User extends CI_Controller {
 			
 		if($this->form_validation->run() == FALSE) {
 			// hasn't been run or there are validation errors
-			
-			$this->load->view('view_register');
+			echo validation_errors();
+			//$this->load->view('view_register');
 		}
 		else {
 			// everything is good - process the form
