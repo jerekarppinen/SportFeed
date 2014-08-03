@@ -4,7 +4,7 @@
 	<?php
 	$attributes = array('class' => 'registerform', 'ng-submit' => 'register.submitForm($event)');
 	$base_url = base_url();
-	echo form_open($base_url . 'index.php/user/register', $attributes);		
+	echo form_open($base_url . 'index.php/register/', $attributes);		
 
 	$username = array(
 		'name' => 'username',
@@ -62,4 +62,9 @@
 		</li>
 	</ul>
 	<?php echo form_close(); ?>
+<<<<<<< HEAD
 </div>
+=======
+</div>
+
+>>>>>>> 463965b55f0363f8572d8c4ea73e2b1397039054
