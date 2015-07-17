@@ -1,3 +1,0 @@
-﻿</div><!--wrapper-->
-</body>
-</html>
