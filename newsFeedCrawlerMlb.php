@@ -35,7 +35,8 @@ $urls = array(
 	"http://mlb.mlb.com/partnerxml/gen/news/rss/sf.xml"
 	);
 
-$responseArray = array();
+$separatedTeamsArray = array();
+$mixedTeamsArray = array();
 
 foreach($urls as $url)
 {
@@ -45,7 +46,7 @@ foreach($urls as $url)
 
 	preg_match('/rss\/(.*?)\./s', $url, $arr);
 	$team = $arr[1];
-	$responseArray[$team] = array();
+	$separatedTeamsArray[$team] = array();
 
 	foreach($response->body->channel->item as $item)
 	{
@@ -53,20 +54,26 @@ foreach($urls as $url)
 			"title" => (string)$item->title,
 			"link" => (string)$item->link,
 			"description" => (string)$item->description,
-			"pubDate" => (string)$item->pubDate
+			"pubDate" => (string)$item->pubDate,
+			"timestamp" => strtotime($item->pubDate)
 			);
 
-		array_push($responseArray[$team], $stuff);
+		array_push($separatedTeamsArray[$team], $stuff);
+		array_push($mixedTeamsArray, $stuff);
 	}
 }
 
-$json = json_encode($responseArray);
+$jsonSeparatedTeams = json_encode($separatedTeamsArray);
+$jsonMixedTeams = json_encode($mixedTeamsArray);
 
 
-$firebase = "https://dazzling-fire-5200.firebaseio.com/mlb.json?auth=KPgAAfxGv33vaNzCpLIPdx7AdINXpXR7PDI38Qkh";
+$firebaseSeparatedTeams = "https://dazzling-fire-5200.firebaseio.com/mlb/teamsSeparated.json?auth=KPgAAfxGv33vaNzCpLIPdx7AdINXpXR7PDI38Qkh";
+$firebaseMixedTeams = "https://dazzling-fire-5200.firebaseio.com/mlb/teamsMixed.json?auth=KPgAAfxGv33vaNzCpLIPdx7AdINXpXR7PDI38Qkh";
 
-$request = \Httpful\Request::put($firebase)->sendsJson()->body($json)->send();
+$request = \Httpful\Request::put($firebaseSeparatedTeams)->sendsJson()->body($jsonSeparatedTeams)->send();
+$request = \Httpful\Request::put($firebaseMixedTeams)->sendsJson()->body($jsonMixedTeams)->send();
 
+/*
 $stringValueOfPos = (string)strpos($request->raw_headers, "HTTP/1.1 200 OK");
 
 // if strpos returned null
@@ -78,4 +85,5 @@ else
 {
 	echo "ok.";
 }
+*/
 ?>

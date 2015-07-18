@@ -37,7 +37,8 @@ $urls = array(
 	"http://www.nfl.com/rss/rsslanding?searchString=team&abbr=arz"
 	);
 
-$responseArray = array();
+$separatedTeamsArray = array();
+$mixedTeamsArray = array();
 
 foreach($urls as $url)
 {
@@ -48,7 +49,7 @@ foreach($urls as $url)
 	$exploded = explode("&abbr=", $url);
 	$team = $exploded[1];
 
-	$responseArray[$team] = array();
+	$separatedTeamsArray[$team] = array();
 
 	foreach($response->body->entry as $entry)
 	{
@@ -56,23 +57,28 @@ foreach($urls as $url)
 			"title" => (string)$entry->title,
 			"link" => (string)$entry->id,
 			"description" => (string)$entry->summary,
-			"pubDate" => (string)$entry->published
+			"pubDate" => (string)$entry->published,
+			"timestamp" => strtotime($entry->published)
 			);
 
 
 
-		array_push($responseArray[$team], $stuff);
+		array_push($separatedTeamsArray[$team], $stuff);
+		array_push($mixedTeamsArray, $stuff);
 	}
 	
 }
 
-$json = json_encode($responseArray);
+$jsonSeparatedTeams = json_encode($separatedTeamsArray);
+$jsonMixedTeams = json_encode($mixedTeamsArray);
 
+$firebaseSeparatedTeams = "https://dazzling-fire-5200.firebaseio.com/nfl/teamsSeparated.json?auth=KPgAAfxGv33vaNzCpLIPdx7AdINXpXR7PDI38Qkh";
+$firebaseMixedTeams = "https://dazzling-fire-5200.firebaseio.com/nfl/teamsMixed.json?auth=KPgAAfxGv33vaNzCpLIPdx7AdINXpXR7PDI38Qkh";
 
-$firebase = "https://dazzling-fire-5200.firebaseio.com/nfl.json?auth=KPgAAfxGv33vaNzCpLIPdx7AdINXpXR7PDI38Qkh";
+$request = \Httpful\Request::put($firebaseSeparatedTeams)->sendsJson()->body($jsonSeparatedTeams)->send();
+$request = \Httpful\Request::put($firebaseMixedTeams)->sendsJson()->body($jsonMixedTeams)->send();
 
-$request = \Httpful\Request::put($firebase)->sendsJson()->body($json)->send();
-
+/*
 $stringValueOfPos = (string)strpos($request->raw_headers, "HTTP/1.1 200 OK");
 
 // if strpos returned null
@@ -85,5 +91,5 @@ else
 	echo "ok.";
 }
 
-
+*/
 ?>

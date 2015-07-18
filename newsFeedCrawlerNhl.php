@@ -34,7 +34,8 @@ $urls = array(
 	"http://capitals.nhl.com/rss/news.xml"
 	);
 
-$responseArray = array();
+$separatedTeamsArray = array();
+$mixedTeamsArray = array();
 
 foreach($urls as $url)
 {
@@ -45,7 +46,7 @@ foreach($urls as $url)
 	preg_match('/http:\/\/(.*?)\./s', $url, $arr);
 	$team = $arr[1];
 	
-	$responseArray[$team] = array();
+	$separatedTeamsArray[$team] = array();
 
 	foreach($response->body->channel->item as $item)
 	{
@@ -53,21 +54,26 @@ foreach($urls as $url)
 			"title" => (string)$item->title,
 			"link" => (string)$item->link,
 			"description" => (string)$item->description,
-			"pubDate" => (string)$item->pubDate
+			"pubDate" => (string)$item->pubDate,
+			"timestamp" => strtotime($item->pubDate)
 			);
 
-		array_push($responseArray[$team], $stuff);
+		array_push($separatedTeamsArray[$team], $stuff);
+		array_push($mixedTeamsArray, $stuff);
 	}
 	
 }
 
-$json = json_encode($responseArray);
+$jsonSeparatedTeams = json_encode($separatedTeamsArray);
+$jsonMixedTeams = json_encode($mixedTeamsArray);
 
+$firebaseSeparatedTeams = "https://dazzling-fire-5200.firebaseio.com/nhl/teamsSeparated.json?auth=KPgAAfxGv33vaNzCpLIPdx7AdINXpXR7PDI38Qkh";
+$firebaseMixedTeams = "https://dazzling-fire-5200.firebaseio.com/nhl/teamsMixed.json?auth=KPgAAfxGv33vaNzCpLIPdx7AdINXpXR7PDI38Qkh";
 
-$firebase = "https://dazzling-fire-5200.firebaseio.com/nhl.json?auth=KPgAAfxGv33vaNzCpLIPdx7AdINXpXR7PDI38Qkh";
+$request = \Httpful\Request::put($firebaseSeparatedTeams)->sendsJson()->body($jsonSeparatedTeams)->send();
+$request = \Httpful\Request::put($firebaseMixedTeams)->sendsJson()->body($jsonMixedTeams)->send();
 
-$request = \Httpful\Request::put($firebase)->sendsJson()->body($json)->send();
-
+/*
 $stringValueOfPos = (string)strpos($request->raw_headers, "HTTP/1.1 200 OK");
 
 // if strpos returned null
@@ -79,7 +85,7 @@ else
 {
 	echo "ok.";
 }
-
+*/
 
 ?>
 
