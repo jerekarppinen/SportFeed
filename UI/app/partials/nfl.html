@@ -1,0 +1,22 @@
+<ng-include src="'partials/navigation.html'"></ng-include>
+<div class="container" ng-controller="NflCtrl">
+	<div class="row">
+	<h2>NFL</h2>
+	</div>
+	<div class="row">
+		<table class="table">
+			<thead>
+				<th>Title</th>
+				<th>Description</th>
+				<th>PubDate</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="news in nfl">
+					<td><a href="{{ news.link }}">{{ news.title }}</a></td>
+					<td>{{ news.description }}</td>
+					<td>{{ news.pubDate }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

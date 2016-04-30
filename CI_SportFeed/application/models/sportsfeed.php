@@ -2,13 +2,154 @@
 
 class Sportsfeed extends CI_Model {
 
+	public function updateTeamFeed($team, $sport)
+	{
+		$this->load->library('rssparser');
+		$this->load->model('rss_db_model');
+
+
+		$data = $this->rss_db_model->getSportIdByTeamAndSport($team, $sport);
+
+		$sport_id = $data->sport_id;
+
+		// Form the url
+		if($sport == "mlb")
+		{
+			$url = "http://partner.mlb.com/partnerxml/gen/news/rss/".$team.".xml";	
+		}
+		if($sport == "nfl")
+		{
+			$url = "http://www.nfl.com/rss/rsslanding?searchString=team&abbr=".$team;
+		}
+		if($sport == "nhl")
+		{
+			$url = "http://".$team.".nhl.com/rss/news.xml";
+		}
+		if($sport == "nba")
+		{
+			$url = "http://www.nba.com/".$team."/rss.xml";
+		}		
+		
+		
+
+		$this->rssparser->set_feed_url($url);
+		$this->rssparser->set_cache_life(30);
+		$result = $this->rssparser->getFeed(10); 	
+
+		$team_id = $this->rss_db_model->getTeamId($team, $sport);
+
+
+		$empty = $this->rss_db_model->checkIfEmptyTeam($team_id);	
+
+		if($empty == true)
+		{
+			// Insert all the news, ignore latest timestamp
+			$this->rss_db_model->insertTeamNews($result, $sport_id, $team_id);
+		}
+
+		elseif($empty == false)
+		{
+			$latestTeamNewsTimestamp = $this->rss_db_model->latestTeamNewsTimestamp($team_id);
+			// Not empty, insert only new news
+			// true if success, false if something went wrong
+			$insert = $this->rss_db_model->insertLatestTeamNews($result, $sport_id, $latestTeamNewsTimestamp, $team_id);					
+		}			
+
+	}
+
+	public function updateSportFeed($sport)
+	{
+		$this->load->library('rssparser');
+		$this->load->model('rss_db_model');
+
+		// Get RSS feed url from db
+		$url = $this->db->query("SELECT sport_id, feed FROM sport WHERE sport = '".$sport."';")->row();
+
+		$feed = $url->feed;
+		$sport_id = $url->sport_id;
+
+		$this->rssparser->set_feed_url($feed);
+		$this->rssparser->set_cache_life(30);
+		$result = $this->rssparser->getFeed(10); 
+
+		// Check if db is empty regarding the sport_id
+		$empty = $this->rss_db_model->checkIfEmpty($sport_id);
+
+		if($empty == true)
+		{
+			// Insert all the news, ignore latest timestamp
+			$this->rss_db_model->insertNews($result, $url->sport_id);
+		}
+		elseif($empty == false)
+		{
+			$latestNewsTimestamp = $this->rss_db_model->latestNewsTimestamp($sport_id);
+				
+			// Not empty, insert only new news
+			// true if success, false if something went wrong
+			$insert = $this->rss_db_model->insertLatestNews($result, $sport_id, $latestNewsTimestamp);					
+		}		
+	}
+	
+	public function updateAllFeeds()
+	{
+		
+		$this->load->library('rssparser');
+		$this->load->model('rss_db_model');
+		
+		// For testing purposes	
+		/*	$urls = array('http://mlb.mlb.com/partnerxml/gen/news/rss/mlb.xml',
+					     'http://www.nfl.com/rss/rsslanding?searchString=home',
+					     'http://www.nba.com/rss/nba_rss.xml',
+					     'http://www.nhl.com/rss/news.xml');*/
+
+		
+		// Get RSS feed urls from db
+		$urls = $this->db->query("SELECT sport_id, feed FROM sport;")->result();
+
+		
+		// Loop urls and take content to db if necessary
+		foreach($urls as $url)
+		{
+
+			$this->rssparser->set_feed_url($url->feed);
+			$this->rssparser->set_cache_life(30);
+			$result = $this->rssparser->getFeed(10); 	
+
+			// Check if db is empty regarding the sport_id
+			$empty = $this->rss_db_model->checkIfEmpty($url->sport_id);
+
+			if($empty == true)
+			{
+				// Insert all the news, ignore latest timestamp
+				$this->rss_db_model->insertNews($result, $url->sport_id);
+			}
+			elseif($empty == false)
+			{
+				$latestNewsTimestamp = $this->rss_db_model->latestNewsTimestamp($url->sport_id);
+					
+				// Not empty, insert only new news
+				// true if success, false if something went wrong
+				$insert = $this->rss_db_model->insertLatestNews($result, $url->sport_id, $latestNewsTimestamp);					
+			}
+
+		}
+
+	}
+
+
+
+
+
+	/*
 	function getGeneralMLB() {
 		
 		$this->load->library('rssparser');                          // load library
 		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/mlb.xml');  // get feed
 		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
 		$rss = $this->rssparser->getFeed(10);                        // Get six items from the feed
-		
+
+		//$feed = "http://mlb.mlb.com/partnerxml/gen/news/rss/mlb.xml";
+		//$rss = simplexml_load_file($feed);
 		return $rss;
 	}
 	
@@ -40,50 +181,9 @@ class Sportsfeed extends CI_Model {
 		$rss = $this->rssparser->getFeed(10);    
 		
 		return $rss;
-	}
-	
-	function AllFeeds() {
-		
-		$this->load->library('rssparser');
-		
-		$fullarray = array();
-		
-		$rss = array('http://mlb.mlb.com/partnerxml/gen/news/rss/mlb.xml',
-				     'http://www.nfl.com/rss/rsslanding?searchString=home',
-				     'http://www.nba.com/rss/nba_rss.xml',
-				     'http://www.nhl.com/rss/news.xml');
-		
-		// Haetaan kaikkien rss-feedien uutiset yhteen taulukkoon			 
-		foreach($rss as $url) {
-			
-			$this->rssparser->set_feed_url($url);
-			$this->rssparser->set_cache_life(30);
-			$fullarray[] = $this->rssparser->getFeed(10); 
-		}
-		
-		// 2-ulotteinen taulukko on väärässä muodossa, joten se pitää muuttaa yksiulotteiseksi viewiä varten
-		
-		foreach($fullarray as $feed) {
-			
-			foreach($feed as $entry) {
-				
-				$return_array[] = $entry; 
-			}
-		}
-		
-		
-		
-		// Sortataan pubDaten perusteella
-		
-	function cmp($a, $b) {
-			$a_m = strtotime($a["pubDate"]);
-			$b_m = strtotime($b["pubDate"]);
-		return strcmp($b_m, $a_m);
-		}
-		usort($return_array,'cmp'); 
-		
-		return $return_array; 
-	}
+	} */
+
+
 
 	// Joukkuekohtaiset feedit
 	/***********************************************************************************************************************************************
@@ -91,314 +191,11 @@ class Sportsfeed extends CI_Model {
 	 * **********************************************************************************************************************************************
 	 * **********************************************************************************************************************************************
 	 */
+	
 	// NFL
-
-	function arizona_cardinals() {
-		
+	function loadNFLTeamFeed($team) {
 		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=ARZ');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	
-	function atlanta_falcons() {
-		
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=ATL');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-
-	function baltimore_ravens() {
-		
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=BAL');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-
-	function buffalo_bills() {
-		
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=BUF');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-
-	function carolina_panthers() {
-		
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=CAR');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	
-	function chicago_bears() {
-		
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=CHI');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	
-	function cincinnati_bengals() {
-		
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=CIN');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	
-	function cleveland_browns() {
-		
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=CLV');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	
-	function dallas_cowboys() {
-		
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=DAL');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-
-	function denver_broncos() {
-		
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=DEN');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	
-	function detroit_lions() {
-		
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=DET');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-
-	function green_bay_packers() {
-		
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=GB');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	
-	function houston_texans() {
-		
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=HOU');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}			
-	
-	function indianapolis_colts() {
-		
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=IND');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-
-	function jaxonville_jaguars() {
-		
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=JAX');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-
-	function kansas_city_chiefs() {
-		
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=KC');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	
-	function miami_dolphins() {
-		
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=MIA');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	
-	function minnesota_vikings() {
-		
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=MIN');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-
-	function new_england_patriots() {
-		
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=NE');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	
-	function new_orleans_saints() {
-		
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=NO');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	
-	function new_york_giants() {
-		
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=NYG');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	
-	function new_york_jets() {
-		
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=NYJ');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	
-	function oakland_raiders() {
-		
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=OAK');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-
-	function philadelphia_eagles() {
-		
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=PHI');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	
-	function pittsburgh_stealers() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=PIT');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	
-	function san_diego_chargers() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=SD');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-
-	function san_francisco_49ers() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=SF');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-
-	function seattle_seahawks() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=SEA');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-
-	function st_louis_rams() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=STL');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-
-	function tampa_bay_buccaneers() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=TB');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-
-	function tennessee_titans() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=TEN');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	
-	function washington_redskins() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr=WAS');  // get feed
+		$this->rssparser->set_feed_url('http://www.nfl.com/rss/rsslanding?searchString=team&abbr='+$team);  // get feed
 		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
 		$rss = $this->rssparser->getFeed(10);    
 		
@@ -700,558 +497,29 @@ class Sportsfeed extends CI_Model {
 	/* ***************************************************************
 	 * 
 	 */
-	 
-	function bobcats() {
+	 function loadNBATeamFeed($team) {
 		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/bobcats/rss.xml');  // get feed
+		$this->rssparser->set_feed_url('http://www.nba.com/'+$team+'/rss.xml');  // get feed
 		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
 		$rss = $this->rssparser->getFeed(10);    
 		
 		return $rss;
 	}
 	
-	function Bucks() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/bucks/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	
-	function bulls() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/bulls/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}				 
-	
-	function cavaliers() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/cavaliers/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	
-	function celtics() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/celtics/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	
-	function clippers() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/clippers/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	
-	function grizzlies() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/grizzlies/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	
-	function hawks() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/hawks/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}				   	 	 	 	  	  	  	 		  	 	
-	
-	function heat() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/heat/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	
-	function jazz() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/jazz/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	
-	function kings() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/kings/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	
-	function knicks() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/knicks/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	
-	function lakers() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/lakers/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	
-	function magic() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/magic/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	
-	function mavericks() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/mavericks/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	
-	function nets() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/nets/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	
-	function nuggets() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/nuggets/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	
-	function pacers() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/pacers/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	
-	function pelicans() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/pelicans/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	
-	function pistons() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/pistons/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	
-	function raptors() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/raptors/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	
-	function rockets() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/rockets/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	
-	function sixers() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/sixers/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	
-	function spurs() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/spurs/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	
-	function suns() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/suns/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	
-	function thunder() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/thunder/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	
-	function trail_blazers() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/blazers/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	
-	function timberwolves() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/timberwolves/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	
-	function warriors() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/warriors/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	
-	function wizards() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://www.nba.com/wizards/rss.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
 	
 	// MLB
 	/* ***************************************************************
 	 * 
 	 */	
-	 
-	 	// American League
-	 
-	 function angels_of_anaheim() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/ana.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	 
-	 function oakland_athletics() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/oak.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	 
-	 function toronto_blue_jays() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/tor.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	 
-	 function tampa_bay_rays() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/tb.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	 
-	 function cleveland_indians() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/cle.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	 
-	 
-	 function seattle_mariners() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/sea.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	 
-	 function baltimore_orioles() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/bal.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	 
-	 
-	 function texas_rangers() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/tex.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	 	 		  	 						
-		
-	 function boston_red_sox() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/bos.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	 
-	 function kansas_city_royals() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/kc.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	 
-	 function detroit_tigers() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/det.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	 
-	 function minnesota_twins() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/min.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	 
-	 function chicago_white_sox() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/cws.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	 
-	 function new_york_yankees() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/nyy.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	 
-	 
-	 // National League
-	 
-	 function houston_astros() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/hou.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	 
-	 function atlanta_braves() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/atl.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	 
-	 function milwaukee_brewers() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/mil.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	 
-	 function st_louis_cardinals() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/stl.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	 
-	 function chicago_cubs() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/chc.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	 
-	 function arizona_diamondbacks() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/ari.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	 
-	 function los_angeles_dodgers() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/la.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	 
-	 function san_francisco_giants() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/sf.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	 
-	 
-	 function miami_marlins() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/mia.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	 
-	 function new_york_mets() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/nym.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	 
-	 function washington_nationals() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/was.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	 
-	 function san_diego_padres() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/sd.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}
-	 
-	 function philadelphia_phillies() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/phi.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	 
-	 function pittsburgh_pirates() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/pit.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}		
-	 
-	 function cincinnati_reds() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/cin.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}	
-	 
-	 function colorado_rockies() {
-		$this->load->library('rssparser');                          // load library
-		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/col.xml');  // get feed
-		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
-		$rss = $this->rssparser->getFeed(10);    
-		
-		return $rss;
-	}		 	   		 	  		 	  	 		 	 		 	  		 	 	  	 
-	 					  																																																											
-}									
 
-
+	function loadMLBTeamFeed($team) {
+		$this->load->library('rssparser');                          // load library
+		$this->rssparser->set_feed_url('http://mlb.mlb.com/partnerxml/gen/news/rss/'.$team.'.xml');  // get feed
+		$this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
+		$rss = $this->rssparser->getFeed(10);    
+		
+		return $rss;
+	}
+		  																																																											
+}
 ?>

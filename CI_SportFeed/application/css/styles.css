@@ -1,49 +1,109 @@
 /* GENERAL STYLES */
-body { margin:0; padding:0; }
+* { margin:0; padding:0; 
+	/*Code below sets the width as defined and takes padding into consideration automatically*/
+	box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+}
+body {  font-family: 'Open sans', sans-serif; }
+ul { list-style-type: none; }
+.clearfix:after { display: block; height: 0;  clear: both; }
 
-#header, #wrapper { min-width:837px; }
+/* view_register.php */
+#registerbox {
+	margin-right: auto;
+	margin-left: auto;
+	width:400px;
+	background-color: #239754;
+	
+	height:100%;
+	color:#FFF;
+	display:none;
+}
+/* OVERRIDES FOR JQUERY UI CSS */
+.ui-dialog { 
+	padding :0.1em; 
+	top:30% !important;
+}
+.ui-widget-overlay {
+	background:none !important;
+	background-color: #202020 !important;
+}
+.ui-dialog-titlebar { padding:0 !important; }
+.ui-widget-header { border:none; background:#239754; }
+.ui-widget, .ui-widget input {font-family:'Open sans', sans-serif !important; }
+.ui-widget input {font-weight:bold;}
+.ui-dialog .ui-dialog-content {padding:30px 30px;}
+.ui-corner-all {border-radius: 0;}
 
+.registerform {margin-top:20px;}
+.registerform input {width:100%;}
+.regsubmit {margin-top:20px; padding:10px 0; background: #F5FFF7; cursor:pointer;}
+ 
 /*header part*/
-#header { margin-left:auto; margin-right:auto; width:96%; position:relative;}
-#bannerHolder  {display:block;  margin-left:auto; margin-right:auto; height:130px; width:60%;max-width:855px; min-width:505px;}
-#banner {width:100%;}
-#loginControl  { position:absolute; top:0; right:0; }
-#loginControl a, #loginControl input[type="submit"] {float:right; }
+#header {
+	position:fixed;
+	top:0;
+	z-index:2;
+	width:400px;
+	background-color: #239754;
+	padding: 10px 0 0 30px;
+	height:100%;
+}
+#bannertext {font-family:'Open sans',sans-serif; font-size: 48px; color:#5882FA; font-weight: normal; }
+#bannertext a:link, #bannertext a:visited { text-decoration:none; color:#FFF; }  /*sininen väri #5882FA*/
 
-/* content part */
-#wrapper { width:96%; margin-left:auto; margin-right:auto; border:1px solid black; height:auto;}
+#navbox { padding-top:40px; }
 
-.clearfix:after {content: "."; display: block; height: 0; overflow: hidden; clear: both; }
+.mlb, .nfl, .nba, .nhl {margin-bottom:5px;}
 
-#navbox { 
-	margin:0;
-	padding:0;
-	padding:7px 0 7px 0;
-	width:100%;
-	text-align:center;
-	border:1px solid red; 
-	list-style-type: none; 
-	font-size:16px;
+.navlink, .navlink:visited { text-decoration:none; color:#FFF;}  /*sininen väri #5882FA*/
+.navlink:hover { color:#202020; } 
+
+.navlink {font-size:20pt;}
+.navlink, .navsublink {cursor:pointer;}
+.teamscontainer { 
+	position:fixed; 
+	display:none;
+	background-color: #30C26D; /* 30C26D 31C26D 34D577 2FB466 2BB364 32BD6C 20C566 15BB5C 15C45F  */
+	border:1px solid #000;
+	/*padding:0.3em 0.4em;*/
 	
 }
-#navbox li { display:inline-block; margin-left:20px; position:relative;}
-#navbox  li a:link, #navbox  li a:visited { text-decoration:none; color:#5882FA;} 
-#navbox  li a:hover { color:#315FDF; } 
-#navbox  li a:active { color:#000; }
 
-#navbox li:hover ul { display:block; }
-#navbox li ul { display:none; border:1px solid #777777; position:absolute; 
-			background-color:#A4A4A4; left:-20px; z-index:100; list-style-type:none; padding:0;}
-/* ENTER TESTAREA */
-			
-#navbox .mlb:hover .divisionholder{ display:block;  }
-.divisionholder{position:absolute; left:-180px; width:400px; background-color:#A4A4A4;  z-index:100; display:none;}
-#navbox .mlb ul { border:1px solid #777777; position:static;
-			 list-style-type:none; padding:0; float:left; width:30%;}
+.conferenceholder {display:inherit;  padding-bottom:0.3em; overflow:hidden;}
+.conferenceholder:last-child { border-top:thin solid #0E7C24;}
 
-/* END TESTAREA */
-#navbox li ul li { display:inline-block; white-space:nowrap; margin:0; width:100%; border-bottom:1px solid #555555; padding:3px;}
-#navbox li ul li:last-child { border:none; }
+.conferencename {text-align: center; font-size: 14pt; color:#222423;}
+.divisionname { text-align: center; border-bottom: thin solid #0E7C24; /* F5FFF7 */ color:#232524; /*#2E312F; /* #F5FFF7; */}
+
+.conferencename, .divisionname {background-color:#2FB466;} /* #34D577 */
+
+.conferenceholder li a{  white-space:nowrap; }
+
+.divisionsholder { white-space: nowrap; display:table; width:100%;}
+.divisions { position:static;
+			 padding:0; 
+			 display:table-cell; }
+
+.teamname { padding:0 0.4em; }
+.navsublink { display:block; color:#F3F3F3; /* #222423 #F3F3F3 */}
+.navsublink:hover { color:#222423; }
+
+#navbox .mlb .divisions {  }
+#navbox .nfl .divisions { }
+#navbox .nba .divisions {  }
+
+
+#loginControl, #userbox  { margin-top:3em; }
+#loginControl .registerlink {text-decoration: none; color:#FFF; cursor:pointer;}
+#loginControl .registerlink:hover { color:#202020; } 
+#loginControl input {margin-bottom: 5px;}
+
+#userbox h3 {color:#FFF;}
+
+/* content part */
+#wrapper {  padding-left:400px;}
 
 #filter-container { 
 	text-align:center; 
@@ -51,33 +111,37 @@ body { margin:0; padding:0; }
 	margin-right:auto; 
 	padding:0; 
 	margin-bottom:2em;
-	list-style-type: none; 
 }
 #filter-container  li { 
 	display:inline-block; 
 	padding:7px; 
 	background-color:#BDBDBD; 
 	border-radius: 5px;
-	box-shadow: 2px 3px 5px #888888;
+	/*box-shadow: 2px 3px 5px #888888;*/
 }
-#filter-container  li a:link,#filter-container  li a:visited  { text-decoration:none; color:#08298A;} 
+#filter-container  li a:link ,#filter-container  li a:visited  { text-decoration:none; color:#08298A;} 
 #filter-container  li a:hover { color:#0040FF; }
 #filter-container  li a:active{ color:#000; }
 
-#news-container { padding:10px; border:1px solid green; margin-left:20px; }
+#news-container { padding:10px; }
 
 .item {
-  width: 240px;
-  min-height: 120px;
-  float: left;
-  margin:0 10px 10px 0;
-  background: #EFEFFB;
-  border: 2px solid #333;
-  border-color: hsla(0, 0%, 0%, 0.5);
-  border-radius: 5px;
+	max-width:15%;
+	min-height: 120px;
+	float: left;
+	margin:8px 0 0 8px ;
+	background: #E6FFF2; /*#F5FFF7;  #F5FFF7; #E2FFE7; #FDFFED;  #E9FFE5;  #B7FDAA; #FCFFDF; #E5FFAE; #F2ECFF; #E2FFE7; */
+	border: 1px solid #333;
+	border-color: hsla(0, 0%, 0%, 0.5);
 }
 .item p { margin: 1em; }
-.item p:last-child { font-size:10pt;
+.item .itemtitle {font-size:14pt; font-weight:bold;}
+.item .itemdescr { font-size:12pt;}
+.item .itemdate { font-size:8pt; }
+.item a {
+	color:#202020;
+	text-decoration:none;
+}
 
 @media screen and (max-width: 1024px){ 
 	
